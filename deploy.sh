@@ -79,8 +79,9 @@ build_locally() {
   log_info "Starte lokalen Build-Prozess..."
   
   # Dependencies installieren
+  # --legacy-peer-deps wegen vaul/Radix UI mit React 19 (offizieller Workaround)
   log_info "Installiere npm-Pakete..."
-  npm install
+  npm install --legacy-peer-deps
   
   # Next.js Build ausführen
   log_info "Führe 'npm run build' aus..."
