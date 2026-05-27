@@ -30,7 +30,7 @@ log_error() { echo -e "${RED}[FEHLER]${NC} ${BOLD}$1${NC}" >&2; }
 # --- KONFIGURATION ---
 # Passe REMOTE_DIR an, falls dein Verzeichnis auf dem Server anders heißt!
 SSH_ALIAS="hetzner"                       # Dein SSH-Alias aus der ~/.ssh/config
-REMOTE_DIR="/var/www/sotkiosk.com"       # Dein bestehendes Verzeichnis auf dem Server
+REMOTE_DIR="/www/wwwroot/sotkiosk.com/out"  # OpenLiteSpeed-Webroot (aaPanel)
 OWNER="www"                              # Webserver-Besitzer (z. B. www oder www-data)
 GROUP="www"                              # Webserver-Gruppe (z. B. www oder www-data)
 USE_SUDO="false"                         # Auf 'true' setzen, falls chown/chmod sudo benötigt (bei root-Login meist 'false')
