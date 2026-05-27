@@ -1,150 +1,238 @@
-"use client"
+import { UtensilsCrossed, Building2, ShoppingBag, Check } from "lucide-react"
 
-import { UtensilsCrossed, Building2, ShoppingBag, Bot, Zap, Shield } from 'lucide-react'
-import Image from 'next/image'
-import { useState } from 'react'
+const markets = [
+  {
+    icon: UtensilsCrossed,
+    title: "Restaurants",
+    description:
+      "Schnellere Tischrotation, höhere Bestellwerte und entlastetes Service-Personal – auch in Stoßzeiten.",
+    benefits: [
+      "Bestellungen direkt am Tisch oder im Eingang",
+      "Foto-Menü mit Upselling-Vorschlägen",
+      "Anbindung an gängige Kassensysteme",
+    ],
+    mockup: <RestaurantMockup />,
+  },
+  {
+    icon: Building2,
+    title: "Kantinen",
+    description:
+      "Reduzierte Schlangen in der Mittagspause, weniger Personalaufwand an der Kasse, klare Tageskarten.",
+    benefits: [
+      "Wechselnde Tageskarten zentral pflegen",
+      "Bargeldlose Abrechnung mit Werksausweis",
+      "Vorbestellung über Mitarbeiter-App",
+    ],
+    mockup: <CafeteriaMockup />,
+  },
+  {
+    icon: ShoppingBag,
+    title: "Supermärkte",
+    description:
+      "Self-Checkout-Lösungen, die Warteschlangen abbauen und Personal für beratungsintensivere Arbeit freisetzen.",
+    benefits: [
+      "Barcode-Scanner und Waage integrierbar",
+      "Diebstahlschutz mit Gewichtsabgleich",
+      "Alterskontrolle für Tabak und Alkohol",
+    ],
+    mockup: <SupermarketMockup />,
+  },
+]
 
 export default function Markets() {
-  const [hoveredMarket, setHoveredMarket] = useState<number | null>(null)
-
-  const markets = [
-    {
-      icon: UtensilsCrossed,
-      title: 'RESTAURANTS',
-      description: 'KI-optimierte Bestellprozesse mit Neural-Network-Empfehlungen für maximale Effizienz.',
-      benefits: ['QUANTUM ORDERING', 'AI RECOMMENDATIONS', 'NEURAL ANALYTICS'],
-      image: '/placeholder-o5n7t.png',
-      color: 'text-cyan-400',
-      bgColor: 'bg-cyan-400/10',
-      code: 'REST_001'
-    },
-    {
-      icon: Building2,
-      title: 'KANTINEN',
-      description: 'Hochleistungs-Terminals für Betriebskantinen mit Predictive-Load-Management.',
-      benefits: ['PEAK-TIME AI', 'CASHLESS MATRIX', 'SMART PLANNING'],
-      image: '/modern-cafeteria-digital-order.png',
-      color: 'text-purple-400',
-      bgColor: 'bg-purple-400/10',
-      code: 'CANT_002'
-    },
-    {
-      icon: ShoppingBag,
-      title: 'SUPERMÄRKTE',
-      description: 'Self-Checkout Revolution mit integrierter KI-Warensicherung und Fraud-Detection.',
-      benefits: ['ZERO QUEUE AI', 'SMART SECURITY', 'HYPER CHECKOUT'],
-      image: '/modern-self-checkout.png',
-      color: 'text-emerald-400',
-      bgColor: 'bg-emerald-400/10',
-      code: 'SUPER_003'
-    }
-  ]
-
   return (
-    <section id="markets" className="py-32 bg-gradient-to-b from-purple-900 via-gray-900 to-blue-900 relative overflow-hidden">
-      {/* Cyber Grid Background */}
-      <div className="absolute inset-0 grid-overlay opacity-10" />
-      <div className="absolute inset-0 scan-lines" />
-
-      {/* Holographic Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_60%,rgba(0,255,255,0.1),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_40%,rgba(255,0,255,0.1),transparent_50%)]" />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center px-6 py-3 rounded-full cyber-card mb-8 animate-cyber-glow">
-            <Bot className="h-5 w-5 text-cyan-400 mr-3 animate-pulse" />
-            <span className="text-sm text-cyan-400 font-mono font-bold tracking-wider">TARGET.MARKETS</span>
-            <div className="ml-3 w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-          </div>
-
-          <h2 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
-            <span className="text-gradient animate-shimmer">UNSERE</span>
-            <span className="block neon-text-pink font-mono tracking-wider">MÄRKTE</span>
+    <section id="markets" className="section section-alt">
+      <div className="container">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="eyebrow">Branchen</span>
+          <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+            Lösungen für die Branchen, die täglich tausende Bestellungen
+            abwickeln
           </h2>
-
-          <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            SOTKIOSK Terminals sind <span className="text-cyan-400 font-semibold">vielseitig einsetzbar</span> und perfekt angepasst
-            an die spezifischen Anforderungen verschiedener <span className="text-purple-400 font-semibold">KI-optimierter Branchen</span>.
+          <p className="mt-4 text-lg text-slate-600">
+            SOTKIOSK ist auf die spezifischen Anforderungen von Gastronomie,
+            Betriebsverpflegung und Handel zugeschnitten.
           </p>
         </div>
 
-        <div className="space-y-20">
-          {markets.map((market, index) => (
-            <div key={index} className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12`}>
+        <div className="mt-20 space-y-24">
+          {markets.map((market, idx) => (
+            <div
+              key={market.title}
+              className={`flex flex-col items-center gap-12 lg:flex-row lg:gap-16 ${
+                idx % 2 === 1 ? "lg:flex-row-reverse" : ""
+              }`}
+            >
               <div className="flex-1">
-                <div className="max-w-lg">
-                  {/* System Code */}
-                  <div className="text-xs font-mono text-gray-500 mb-4 opacity-50">
-                    {market.code}
-                  </div>
-
-                  {/* Icon */}
-                  <div className={`w-20 h-20 ${market.bgColor} rounded-2xl flex items-center justify-center mb-8 group hover:scale-110 hover:rotate-6 transition-all duration-500 relative`}>
-                    <market.icon className={`h-10 w-10 ${market.color}`} />
-                    {hoveredMarket === index && (
-                      <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-purple-400/20 rounded-2xl animate-pulse" />
-                    )}
-                  </div>
-
-                  <h3 className={`text-4xl font-bold mb-6 font-mono tracking-wider ${market.color}`}>
-                    {market.title}
-                  </h3>
-
-                  <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                    {market.description}
-                  </p>
-
-                  <ul className="space-y-4">
-                    {market.benefits.map((benefit, benefitIndex) => (
-                      <li key={benefitIndex} className="flex items-center text-gray-400 group">
-                        <div className={`w-3 h-3 ${market.color.replace('text-', 'bg-')} rounded-full mr-4 animate-pulse`} />
-                        <span className="font-mono text-sm group-hover:text-gray-300 transition-colors">
-                          {benefit}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Status */}
-                  <div className="mt-8 flex items-center space-x-2 text-sm font-mono">
-                    <div className={`w-2 h-2 ${market.color.replace('text-', 'bg-')} rounded-full animate-pulse`}></div>
-                    <span className={market.color}>DEPLOYMENT READY</span>
-                  </div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600 ring-1 ring-inset ring-blue-100">
+                  <market.icon className="h-5 w-5" />
                 </div>
+                <h3 className="mt-5 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+                  {market.title}
+                </h3>
+                <p className="mt-4 text-base leading-relaxed text-slate-600">
+                  {market.description}
+                </p>
+                <ul className="mt-6 space-y-3">
+                  {market.benefits.map((benefit) => (
+                    <li
+                      key={benefit}
+                      className="flex items-start gap-3 text-sm text-slate-700"
+                    >
+                      <span className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                        <Check className="h-3 w-3" />
+                      </span>
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="flex-1">
-                <div className="relative group">
-                  {/* Holographic Frame */}
-                  <div className={`absolute inset-0 ${market.color.replace('text-', 'bg-')}/20 rounded-3xl blur-2xl opacity-30 group-hover:opacity-60 transition-opacity duration-500 animate-pulse`} />
 
-                  {/* Terminal Frame */}
-                  <div className="relative cyber-card p-4 hover:animate-cyber-glow">
-                    <Image
-                      src={market.image || "/placeholder.svg"}
-                      alt={market.title}
-                      width={600}
-                      height={400}
-                      className="relative rounded-2xl group-hover:scale-105 transition-transform duration-500"
-                    />
-
-                    {/* Scan Line Overlay */}
-                    <div className="absolute inset-4 bg-gradient-to-t from-transparent via-cyan-400/10 to-transparent animate-scan-line opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"></div>
-
-                    {/* Status Indicators */}
-                    <div className="absolute top-8 left-8 flex space-x-2">
-                      <div className={`w-2 h-2 ${market.color.replace('text-', 'bg-')} rounded-full animate-pulse`}></div>
-                      <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div className="flex-1">{market.mockup}</div>
             </div>
           ))}
         </div>
       </div>
     </section>
+  )
+}
+
+function MockupFrame({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative mx-auto w-full max-w-md">
+      <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-br from-blue-100/60 to-transparent blur-2xl" />
+      <div className="rounded-[1.75rem] border border-slate-200 bg-white p-2 shadow-card">
+        <div className="overflow-hidden rounded-[1.4rem] border border-slate-100 bg-white">
+          {children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function RestaurantMockup() {
+  const items = [
+    { name: "Burger Royal", price: "12,90 €", emoji: "🍔" },
+    { name: "Pommes", price: "3,80 €", emoji: "🍟" },
+    { name: "Cola 0,4l", price: "3,20 €", emoji: "🥤" },
+  ]
+  return (
+    <MockupFrame>
+      <div className="bg-gradient-to-b from-blue-50 to-white p-5">
+        <p className="text-xs font-medium uppercase tracking-wide text-blue-600">
+          Burger Bar
+        </p>
+        <p className="mt-1 text-lg font-semibold text-slate-900">
+          Was darf es heute sein?
+        </p>
+      </div>
+      <div className="space-y-2 px-3 py-4">
+        {items.map((item) => (
+          <div
+            key={item.name}
+            className="flex items-center gap-3 rounded-xl bg-slate-50 px-3 py-3"
+          >
+            <span className="grid h-10 w-10 place-items-center rounded-lg bg-white text-xl shadow-soft">
+              {item.emoji}
+            </span>
+            <p className="flex-1 text-sm font-medium text-slate-900">
+              {item.name}
+            </p>
+            <span className="text-sm font-semibold text-slate-900">
+              {item.price}
+            </span>
+          </div>
+        ))}
+      </div>
+      <div className="flex items-center justify-between border-t border-slate-100 bg-slate-50 px-5 py-3 text-sm">
+        <span className="text-slate-500">Summe</span>
+        <span className="font-semibold text-slate-900">19,90 €</span>
+      </div>
+    </MockupFrame>
+  )
+}
+
+function CafeteriaMockup() {
+  const meals = [
+    { name: "Spaghetti Bolognese", tag: "Klassiker", price: "5,80 €" },
+    { name: "Linsen-Curry (vegan)", tag: "Veggie", price: "5,20 €" },
+    { name: "Fisch mit Reis", tag: "Leicht", price: "6,40 €" },
+  ]
+  return (
+    <MockupFrame>
+      <div className="flex items-center justify-between bg-slate-900 px-5 py-4 text-white">
+        <div>
+          <p className="text-xs uppercase tracking-wide text-slate-300">
+            Tageskarte
+          </p>
+          <p className="mt-1 text-sm font-semibold">Mittwoch, 12 – 14 Uhr</p>
+        </div>
+        <span className="rounded-full bg-emerald-500/20 px-2.5 py-1 text-xs font-medium text-emerald-300">
+          Aktiv
+        </span>
+      </div>
+      <div className="space-y-2 px-3 py-4">
+        {meals.map((meal, idx) => (
+          <div
+            key={meal.name}
+            className={`flex items-center gap-3 rounded-xl px-3 py-3 ${
+              idx === 1 ? "bg-blue-50 ring-1 ring-blue-200" : "bg-slate-50"
+            }`}
+          >
+            <div className="flex-1">
+              <p className="text-sm font-medium text-slate-900">{meal.name}</p>
+              <p className="mt-0.5 text-xs text-slate-500">{meal.tag}</p>
+            </div>
+            <span className="text-sm font-semibold text-slate-900">
+              {meal.price}
+            </span>
+          </div>
+        ))}
+      </div>
+      <div className="border-t border-slate-100 px-5 py-3 text-xs text-slate-500">
+        Abrechnung über Werksausweis
+      </div>
+    </MockupFrame>
+  )
+}
+
+function SupermarketMockup() {
+  const items = [
+    { name: "Vollmilch 1l", qty: "2 ×", price: "2,38 €" },
+    { name: "Brot Mehrkorn", qty: "1 ×", price: "2,79 €" },
+    { name: "Äpfel (kg)", qty: "0,820 kg", price: "1,89 €" },
+  ]
+  return (
+    <MockupFrame>
+      <div className="flex items-center justify-between bg-white px-5 py-4">
+        <div>
+          <p className="text-xs font-medium uppercase tracking-wide text-blue-600">
+            Self-Checkout
+          </p>
+          <p className="mt-1 text-sm font-semibold text-slate-900">Kasse 3</p>
+        </div>
+        <span className="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700">
+          Scan aktiv
+        </span>
+      </div>
+      <div className="space-y-1 border-t border-slate-100 px-3 py-3">
+        {items.map((item) => (
+          <div
+            key={item.name}
+            className="flex items-center justify-between rounded-lg px-2 py-2.5 text-sm"
+          >
+            <span className="text-slate-900">{item.name}</span>
+            <div className="flex items-baseline gap-3">
+              <span className="text-xs text-slate-500">{item.qty}</span>
+              <span className="font-medium text-slate-900">{item.price}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="flex items-center justify-between border-t border-slate-100 bg-slate-50 px-5 py-3 text-sm">
+        <span className="text-slate-500">Gesamt</span>
+        <span className="text-base font-semibold text-slate-900">7,06 €</span>
+      </div>
+    </MockupFrame>
   )
 }

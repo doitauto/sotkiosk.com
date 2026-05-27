@@ -1,247 +1,294 @@
 "use client"
 
-import { useState } from 'react'
-import { Mail, Phone, MapPin, Send, Sparkles, ArrowRight, Bot, Zap, Shield, Cpu } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useState } from "react"
+import { Mail, Phone, MapPin, Clock, Send } from "lucide-react"
+import { toast } from "sonner"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY
+const RECIPIENT_EMAIL = "info@doitauto.de"
 
 export default function Contact() {
+  const [submitting, setSubmitting] = useState(false)
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    message: ''
+    name: "",
+    email: "",
+    company: "",
+    message: "",
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    console.log('Form submitted:', formData)
-    setIsSubmitting(false)
-  }
+    setSubmitting(true)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+    if (WEB3FORMS_KEY) {
+      try {
+        const payload = new FormData()
+        payload.append("access_key", WEB3FORMS_KEY)
+        payload.append("subject", `Anfrage von ${formData.name} – SOTKIOSK`)
+        payload.append("from_name", formData.name)
+        payload.append("name", formData.name)
+        payload.append("email", formData.email)
+        payload.append("company", formData.company)
+        payload.append("message", formData.message)
 
-  const contactInfo = [
-    {
-      icon: Phone,
-      title: 'QUANTUM HOTLINE',
-      content: '07336 8543',
-      color: 'text-cyan-400',
-      bgColor: 'bg-cyan-400/10',
-      description: '24/7 AI-SUPPORT',
-      code: 'PHONE_001'
-    },
-    {
-      icon: Mail,
-      title: 'NEURAL MAIL',
-      content: 'info@doitauto.de',
-      color: 'text-purple-400',
-      bgColor: 'bg-purple-400/10',
-      description: 'INSTANT RESPONSE',
-      code: 'MAIL_002'
-    },
-    {
-      icon: MapPin,
-      title: 'COMMAND CENTER',
-      content: 'Hauptstr. 18\n89173 Lonsee',
-      color: 'text-emerald-400',
-      bgColor: 'bg-emerald-400/10',
-      description: 'INNOVATION HUB',
-      code: 'LOC_003'
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: payload,
+        })
+        const data = await res.json()
+
+        if (data.success) {
+          toast.success("Nachricht gesendet", {
+            description: "Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
+          })
+          setFormData({ name: "", email: "", company: "", message: "" })
+        } else {
+          throw new Error(data.message || "Versand fehlgeschlagen")
+        }
+      } catch (err) {
+        toast.error("Versand fehlgeschlagen", {
+          description: "Bitte schreiben Sie uns direkt an info@doitauto.de.",
+        })
+      } finally {
+        setSubmitting(false)
+      }
+      return
     }
-  ]
+
+    const subject = encodeURIComponent(`Anfrage von ${formData.name}`)
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nE-Mail: ${formData.email}\nUnternehmen: ${formData.company}\n\nNachricht:\n${formData.message}`,
+    )
+    window.location.href = `mailto:${RECIPIENT_EMAIL}?subject=${subject}&body=${body}`
+    toast.info("E-Mail-Programm wird geöffnet", {
+      description: "Falls sich nichts öffnet, schreiben Sie uns an info@doitauto.de.",
+    })
+    setSubmitting(false)
+  }
 
   return (
-    <section id="contact" className="py-32 bg-gradient-to-b from-blue-900 via-gray-900 to-purple-900 relative overflow-hidden">
-      {/* Cyber Grid Background */}
-      <div className="absolute inset-0 grid-overlay opacity-10" />
-      <div className="absolute inset-0 scan-lines" />
-
-      {/* Holographic Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(0,255,255,0.1),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,0,255,0.1),transparent_50%)]" />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center px-6 py-3 rounded-full cyber-card mb-8 animate-cyber-glow">
-            <Bot className="h-5 w-5 text-cyan-400 mr-3 animate-pulse" />
-            <span className="text-sm text-cyan-400 font-mono font-bold tracking-wider">CONTACT.SYSTEM</span>
-            <div className="ml-3 w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-          </div>
-
-          <h2 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
-            <span className="text-gradient animate-shimmer">LASSEN SIE UNS</span>
-            <span className="block neon-text font-mono tracking-wider">SPRECHEN</span>
+    <section id="contact" className="section section-alt">
+      <div className="container">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="eyebrow">Kontakt</span>
+          <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+            Lassen Sie uns über Ihr Projekt sprechen
           </h2>
-          <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Bereit für die <span className="text-cyan-400 font-semibold">Zukunft</span>? Lassen Sie uns gemeinsam die perfekte
-            <span className="text-purple-400 font-semibold">KI-gestützte Self Order Terminal Lösung</span> für Ihr Unternehmen entwickeln.
+          <p className="mt-4 text-lg text-slate-600">
+            Schreiben Sie uns oder rufen Sie an – wir melden uns innerhalb von
+            24 Stunden mit einem konkreten Vorschlag.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {/* Contact Info Cards */}
-          <div className="space-y-6">
-            {contactInfo.map((info, index) => (
-              <div key={index} className="cyber-card p-6 hover:animate-cyber-glow transition-all duration-500 group">
-                {/* System Code */}
-                <div className="absolute top-4 right-4 text-xs font-mono text-gray-500 opacity-50">
-                  {info.code}
-                </div>
+        <div className="mx-auto mt-16 grid max-w-6xl gap-8 lg:grid-cols-5">
+          <aside className="space-y-6 lg:col-span-2">
+            <ContactItem
+              icon={Phone}
+              title="Telefon"
+              value="07336 8543"
+              href="tel:+4973368543"
+              detail="Mo – Fr, 8:00 – 17:00 Uhr"
+            />
+            <ContactItem
+              icon={Mail}
+              title="E-Mail"
+              value="info@doitauto.de"
+              href="mailto:info@doitauto.de"
+              detail="Antwort innerhalb von 24 Stunden"
+            />
+            <ContactItem
+              icon={MapPin}
+              title="Adresse"
+              value="Hauptstr. 18, 89173 Lonsee"
+              detail="Süddeutschland, nahe Ulm"
+            />
+            <ContactItem
+              icon={Clock}
+              title="Geschäftszeiten"
+              value="Montag bis Freitag"
+              detail="8:00 – 17:00 Uhr"
+            />
+          </aside>
 
-                {/* Status Indicator */}
-                <div className="absolute top-4 left-4 flex items-center space-x-2">
-                  <div className={`w-2 h-2 ${info.color.replace('text-', 'bg-')} rounded-full animate-pulse`}></div>
-                  <div className="text-xs font-mono text-gray-400">ONLINE</div>
-                </div>
+          <div className="lg:col-span-3">
+            <form
+              onSubmit={handleSubmit}
+              className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card sm:p-8"
+            >
+              <input
+                type="checkbox"
+                name="botcheck"
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+              />
 
-                {/* Icon */}
-                <div className={`w-20 h-20 ${info.bgColor} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 relative mt-8`}>
-                  <info.icon className={`h-10 w-10 ${info.color}`} />
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-purple-400/20 rounded-2xl opacity-0 group-hover:opacity-100 animate-pulse transition-opacity duration-500" />
-                </div>
-
-                <h3 className={`text-xl font-bold mb-2 transition-colors relative z-10 font-mono tracking-wider text-center ${info.color}`}>
-                  {info.title}
-                </h3>
-
-                <p className={`text-sm font-medium text-center mb-4 ${info.color} opacity-80`}>
-                  {info.description}
-                </p>
-
-                <p className="text-gray-300 whitespace-pre-line group-hover:text-white transition-colors text-center font-mono text-sm">
-                  {info.content}
-                </p>
-
-                {/* Connection Status */}
-                <div className="mt-4 text-center">
-                  <div className="text-xs font-mono text-gray-500">
-                    CONNECTION: SECURE
-                  </div>
-                </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field
+                  id="name"
+                  label="Name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Ihr Name"
+                  autoComplete="name"
+                />
+                <Field
+                  id="email"
+                  label="E-Mail"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="ihre@email.de"
+                  autoComplete="email"
+                />
               </div>
-            ))}
-          </div>
 
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card className="relative overflow-hidden bg-white/80 backdrop-blur-xl border-gray-200 hover:border-blue-300 transition-all duration-500 shadow-lg hover:shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50" />
-              
-              <CardHeader className="relative z-10">
-                <CardTitle className="text-3xl font-bold text-gray-900 text-center mb-2">
-                  Nachricht senden
-                </CardTitle>
-                <p className="text-gray-600 text-center">Wir antworten innerhalb von 24 Stunden</p>
-              </CardHeader>
-              
-              <CardContent className="relative z-10">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="group">
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors">
-                        Name *
-                      </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="bg-white/80 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:bg-white transition-all duration-300 rounded-xl"
-                        placeholder="Ihr Name"
-                      />
-                    </div>
-                    <div className="group">
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors">
-                        E-Mail *
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="bg-white/80 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:bg-white transition-all duration-300 rounded-xl"
-                        placeholder="ihre@email.de"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="group">
-                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors">
-                      Unternehmen
-                    </label>
-                    <Input
-                      id="company"
-                      name="company"
-                      type="text"
-                      value={formData.company}
-                      onChange={handleChange}
-                      className="bg-white/80 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:bg-white transition-all duration-300 rounded-xl"
-                      placeholder="Ihr Unternehmen"
-                    />
-                  </div>
+              <div className="mt-5">
+                <Field
+                  id="company"
+                  label="Unternehmen"
+                  value={formData.company}
+                  onChange={handleChange}
+                  placeholder="Ihr Unternehmen (optional)"
+                  autoComplete="organization"
+                />
+              </div>
 
-                  <div className="group">
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors">
-                      Nachricht *
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      rows={6}
-                      required
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="bg-white/80 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:bg-white transition-all duration-300 rounded-xl resize-none"
-                      placeholder="Erzählen Sie uns von Ihrem Projekt und wie wir Ihnen helfen können..."
-                    />
-                  </div>
+              <div className="mt-5">
+                <Label htmlFor="message" className="text-sm font-medium text-slate-700">
+                  Nachricht <span className="text-red-500">*</span>
+                </Label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  required
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Erzählen Sie kurz von Ihrem Standort und Ihren Anforderungen."
+                  className="mt-1.5 resize-none"
+                />
+              </div>
 
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    disabled={isSubmitting}
-                    className="w-full group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 py-4 text-lg font-semibold rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
-                  >
-                    <span className="relative z-10 flex items-center justify-center">
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
-                          Wird gesendet...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                          Nachricht senden
-                          <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                        </>
-                      )}
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+              <Button
+                type="submit"
+                size="lg"
+                className="mt-6 w-full sm:w-auto"
+                disabled={submitting}
+              >
+                {submitting ? (
+                  <>
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                    Wird gesendet…
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4" />
+                    Nachricht senden
+                  </>
+                )}
+              </Button>
+
+              <p className="mt-4 text-xs text-slate-500">
+                Mit dem Absenden stimmen Sie unserer{" "}
+                <a href="/datenschutz" className="underline hover:text-slate-700">
+                  Datenschutzerklärung
+                </a>{" "}
+                zu.
+              </p>
+            </form>
           </div>
         </div>
       </div>
     </section>
+  )
+}
+
+function ContactItem({
+  icon: Icon,
+  title,
+  value,
+  detail,
+  href,
+}: {
+  icon: React.ComponentType<{ className?: string }>
+  title: string
+  value: string
+  detail?: string
+  href?: string
+}) {
+  const ValueTag = href ? "a" : "p"
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
+      <div className="flex items-start gap-4">
+        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 ring-1 ring-inset ring-blue-100">
+          <Icon className="h-5 w-5" />
+        </div>
+        <div>
+          <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+            {title}
+          </p>
+          <ValueTag
+            {...(href ? { href } : {})}
+            className={`mt-1 text-sm font-semibold text-slate-900 ${href ? "hover:text-blue-600" : ""}`}
+          >
+            {value}
+          </ValueTag>
+          {detail && <p className="mt-0.5 text-xs text-slate-500">{detail}</p>}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Field({
+  id,
+  label,
+  type = "text",
+  required = false,
+  value,
+  onChange,
+  placeholder,
+  autoComplete,
+}: {
+  id: string
+  label: string
+  type?: string
+  required?: boolean
+  value: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  placeholder?: string
+  autoComplete?: string
+}) {
+  return (
+    <div>
+      <Label htmlFor={id} className="text-sm font-medium text-slate-700">
+        {label} {required && <span className="text-red-500">*</span>}
+      </Label>
+      <Input
+        id={id}
+        name={id}
+        type={type}
+        required={required}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        autoComplete={autoComplete}
+        className="mt-1.5"
+      />
+    </div>
   )
 }

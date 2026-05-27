@@ -4,14 +4,20 @@ import './globals.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import CookieBanner from '../components/CookieBanner'
+import { Toaster } from '@/components/ui/sonner'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: 'SOTKIOSK - Self Order Terminals für Restaurants & Supermärkte',
-  description: 'Professionelle Self Order Terminals mit eigener Software für Restaurants, Kantinen und Supermärkte. Miete oder Kauf verfügbar von SOTKIOSK.',
-  keywords: 'Self Order Terminal, Restaurant Kiosk, Supermarkt Terminal, Kantinen Software, SOTKIOSK',
-    generator: 'v0.dev'
+  title: 'SOTKIOSK – Self-Order-Terminals für Restaurants, Kantinen & Supermärkte',
+  description:
+    'Self-Order-Terminals mit eigener Software für Restaurants, Kantinen und Supermärkte. Miete ab 299 €/Monat oder Kauf ab 4.999 €. Made in Germany, DSGVO-konform.',
+  keywords:
+    'Self-Order-Terminal, Restaurant Kiosk, Supermarkt Terminal, Kantinen Software, SOTKIOSK, Bestellterminal',
 }
 
 export default function RootLayout({
@@ -20,12 +26,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="de">
-      <body className={inter.className}>
+    <html lang="de" className={inter.variable}>
+      <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         <Header />
-        {children}
+        <main className="pt-16">{children}</main>
         <Footer />
         <CookieBanner />
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   )

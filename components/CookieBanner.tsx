@@ -1,8 +1,11 @@
-'use client'
+"use client"
 
-import { useState, useEffect } from 'react'
-import { X, Cookie, Settings } from 'lucide-react'
-import Link from 'next/link'
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import { Cookie, Settings, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
 
 interface CookiePreferences {
   necessary: boolean
@@ -15,245 +18,190 @@ export default function CookieBanner() {
   const [showBanner, setShowBanner] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [preferences, setPreferences] = useState<CookiePreferences>({
-    necessary: true, // Always true, cannot be disabled
+    necessary: true,
     functional: false,
     analytics: false,
-    marketing: false
+    marketing: false,
   })
 
   useEffect(() => {
-    // Check if user has already made a choice
-    const cookieConsent = localStorage.getItem('cookieConsent')
-    if (!cookieConsent) {
-      setShowBanner(true)
-    }
+    const cookieConsent = localStorage.getItem("cookieConsent")
+    if (!cookieConsent) setShowBanner(true)
   }, [])
 
-  const handleAcceptAll = () => {
-    const allAccepted = {
-      necessary: true,
-      functional: true,
-      analytics: true,
-      marketing: true
-    }
-    setPreferences(allAccepted)
-    saveCookiePreferences(allAccepted)
-    setShowBanner(false)
-  }
-
-  const handleRejectAll = () => {
-    const onlyNecessary = {
-      necessary: true,
-      functional: false,
-      analytics: false,
-      marketing: false
-    }
-    setPreferences(onlyNecessary)
-    saveCookiePreferences(onlyNecessary)
-    setShowBanner(false)
-  }
-
-  const handleSaveSettings = () => {
-    saveCookiePreferences(preferences)
+  const saveAndClose = (prefs: CookiePreferences) => {
+    localStorage.setItem(
+      "cookieConsent",
+      JSON.stringify({
+        timestamp: new Date().toISOString(),
+        preferences: prefs,
+      }),
+    )
     setShowBanner(false)
     setShowSettings(false)
   }
 
-  const saveCookiePreferences = (prefs: CookiePreferences) => {
-    localStorage.setItem('cookieConsent', JSON.stringify({
-      timestamp: new Date().toISOString(),
-      preferences: prefs
-    }))
-    
-    // Here you would typically integrate with your analytics/marketing tools
-    // For example:
-    // if (prefs.analytics) {
-    //   // Initialize Google Analytics
-    // }
-    // if (prefs.marketing) {
-    //   // Initialize marketing pixels
-    // }
-  }
-
-  const handlePreferenceChange = (type: keyof CookiePreferences) => {
-    if (type === 'necessary') return // Cannot be disabled
-    
-    setPreferences(prev => ({
-      ...prev,
-      [type]: !prev[type]
-    }))
-  }
-
   if (!showBanner) return null
 
-  return (
-    <>
-      {/* Backdrop */}
-      <div className="fixed inset-0 bg-black bg-opacity-50 z-40" />
-      
-      {/* Cookie Banner */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          {!showSettings ? (
-            // Main Banner
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-              <div className="flex items-start space-x-3">
-                <Cookie className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                    Wir verwenden Cookies
-                  </h3>
-                  <p className="text-gray-700 text-sm">
-                    Wir verwenden Cookies, um Ihre Erfahrung auf unserer Website zu verbessern. 
-                    Einige sind notwendig für die Funktionalität, andere helfen uns, die Website 
-                    zu analysieren und zu verbessern. Sie können Ihre Einstellungen jederzeit anpassen.
-                  </p>
-                  <Link 
-                    href="/cookies" 
-                    className="text-blue-600 hover:text-blue-800 underline text-sm mt-1 inline-block"
-                  >
-                    Mehr über Cookies erfahren
-                  </Link>
-                </div>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-3 lg:flex-shrink-0">
-                <button
-                  onClick={() => setShowSettings(true)}
-                  className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-                >
-                  <Settings className="h-4 w-4 mr-2" />
-                  Einstellungen
-                </button>
-                <button
-                  onClick={handleRejectAll}
-                  className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-                >
-                  Nur notwendige
-                </button>
-                <button
-                  onClick={handleAcceptAll}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 transition-colors"
-                >
-                  Alle akzeptieren
-                </button>
-              </div>
+  if (showSettings) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/40 backdrop-blur-sm sm:items-center sm:p-4">
+        <div className="relative w-full max-w-2xl rounded-t-2xl border border-slate-200 bg-white shadow-elevated sm:rounded-2xl">
+          <div className="flex items-start justify-between border-b border-slate-200 px-6 py-5">
+            <div>
+              <h2 className="text-lg font-semibold text-slate-900">
+                Cookie-Einstellungen
+              </h2>
+              <p className="mt-1 text-sm text-slate-600">
+                Wählen Sie, welche Cookies Sie zulassen möchten.
+              </p>
             </div>
-          ) : (
-            // Settings Panel
-            <div className="max-w-4xl mx-auto">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold text-gray-900">Cookie-Einstellungen</h3>
-                <button
-                  onClick={() => setShowSettings(false)}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
-              
-              <div className="space-y-6">
-                {/* Necessary Cookies */}
-                <div className="flex items-start justify-between p-4 bg-gray-50 rounded-lg">
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-gray-900 mb-1">Notwendige Cookies</h4>
-                    <p className="text-sm text-gray-600">
-                      Diese Cookies sind für die grundlegende Funktionalität der Website erforderlich 
-                      und können nicht deaktiviert werden.
-                    </p>
-                  </div>
-                  <div className="ml-4">
-                    <div className="w-12 h-6 bg-blue-600 rounded-full flex items-center justify-end px-1">
-                      <div className="w-4 h-4 bg-white rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
+            <button
+              onClick={() => setShowSettings(false)}
+              className="rounded-md p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700"
+              aria-label="Schließen"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
 
-                {/* Functional Cookies */}
-                <div className="flex items-start justify-between p-4 border border-gray-200 rounded-lg">
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-gray-900 mb-1">Funktionale Cookies</h4>
-                    <p className="text-sm text-gray-600">
-                      Diese Cookies ermöglichen erweiterte Funktionalität und Personalisierung.
-                    </p>
-                  </div>
-                  <div className="ml-4">
-                    <button
-                      onClick={() => handlePreferenceChange('functional')}
-                      className={`w-12 h-6 rounded-full flex items-center transition-colors ${
-                        preferences.functional 
-                          ? 'bg-blue-600 justify-end' 
-                          : 'bg-gray-300 justify-start'
-                      } px-1`}
-                    >
-                      <div className="w-4 h-4 bg-white rounded-full"></div>
-                    </button>
-                  </div>
-                </div>
+          <div className="max-h-[60vh] space-y-4 overflow-y-auto px-6 py-5">
+            <CookieRow
+              title="Notwendige Cookies"
+              description="Erforderlich für Grundfunktionen der Website. Können nicht deaktiviert werden."
+              checked
+              disabled
+            />
+            <CookieRow
+              title="Funktionale Cookies"
+              description="Ermöglichen erweiterte Funktionen und Personalisierung."
+              checked={preferences.functional}
+              onChange={(v) =>
+                setPreferences({ ...preferences, functional: v })
+              }
+            />
+            <CookieRow
+              title="Analytische Cookies"
+              description="Helfen uns zu verstehen, wie die Website genutzt wird."
+              checked={preferences.analytics}
+              onChange={(v) => setPreferences({ ...preferences, analytics: v })}
+            />
+            <CookieRow
+              title="Marketing-Cookies"
+              description="Werden für personalisierte Werbung verwendet."
+              checked={preferences.marketing}
+              onChange={(v) => setPreferences({ ...preferences, marketing: v })}
+            />
+          </div>
 
-                {/* Analytics Cookies */}
-                <div className="flex items-start justify-between p-4 border border-gray-200 rounded-lg">
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-gray-900 mb-1">Analytische Cookies</h4>
-                    <p className="text-sm text-gray-600">
-                      Diese Cookies helfen uns zu verstehen, wie Besucher mit der Website interagieren.
-                    </p>
-                  </div>
-                  <div className="ml-4">
-                    <button
-                      onClick={() => handlePreferenceChange('analytics')}
-                      className={`w-12 h-6 rounded-full flex items-center transition-colors ${
-                        preferences.analytics 
-                          ? 'bg-blue-600 justify-end' 
-                          : 'bg-gray-300 justify-start'
-                      } px-1`}
-                    >
-                      <div className="w-4 h-4 bg-white rounded-full"></div>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Marketing Cookies */}
-                <div className="flex items-start justify-between p-4 border border-gray-200 rounded-lg">
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-gray-900 mb-1">Marketing-Cookies</h4>
-                    <p className="text-sm text-gray-600">
-                      Diese Cookies werden verwendet, um Werbung relevanter zu machen.
-                    </p>
-                  </div>
-                  <div className="ml-4">
-                    <button
-                      onClick={() => handlePreferenceChange('marketing')}
-                      className={`w-12 h-6 rounded-full flex items-center transition-colors ${
-                        preferences.marketing 
-                          ? 'bg-blue-600 justify-end' 
-                          : 'bg-gray-300 justify-start'
-                      } px-1`}
-                    >
-                      <div className="w-4 h-4 bg-white rounded-full"></div>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex justify-end space-x-3 mt-6">
-                <button
-                  onClick={() => setShowSettings(false)}
-                  className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-                >
-                  Abbrechen
-                </button>
-                <button
-                  onClick={handleSaveSettings}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 transition-colors"
-                >
-                  Einstellungen speichern
-                </button>
-              </div>
-            </div>
-          )}
+          <div className="flex flex-col-reverse gap-2 border-t border-slate-200 px-6 py-4 sm:flex-row sm:justify-end">
+            <Button variant="outline" onClick={() => setShowSettings(false)}>
+              Abbrechen
+            </Button>
+            <Button onClick={() => saveAndClose(preferences)}>
+              Einstellungen speichern
+            </Button>
+          </div>
         </div>
       </div>
-    </>
+    )
+  }
+
+  return (
+    <div className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-white p-5 shadow-elevated sm:p-6">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex items-start gap-3">
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+            <Cookie className="h-5 w-5" />
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-slate-900">
+              Wir verwenden Cookies
+            </p>
+            <p className="mt-1 text-sm text-slate-600">
+              Einige sind notwendig, andere helfen uns die Website zu
+              verbessern.{" "}
+              <Link
+                href="/cookies"
+                className="font-medium text-blue-600 underline-offset-4 hover:underline"
+              >
+                Mehr erfahren
+              </Link>
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2 sm:flex-row lg:flex-shrink-0">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShowSettings(true)}
+          >
+            <Settings className="h-4 w-4" />
+            Einstellungen
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() =>
+              saveAndClose({
+                necessary: true,
+                functional: false,
+                analytics: false,
+                marketing: false,
+              })
+            }
+          >
+            Nur notwendige
+          </Button>
+          <Button
+            size="sm"
+            onClick={() =>
+              saveAndClose({
+                necessary: true,
+                functional: true,
+                analytics: true,
+                marketing: true,
+              })
+            }
+          >
+            Alle akzeptieren
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function CookieRow({
+  title,
+  description,
+  checked,
+  disabled = false,
+  onChange,
+}: {
+  title: string
+  description: string
+  checked: boolean
+  disabled?: boolean
+  onChange?: (v: boolean) => void
+}) {
+  const id = title.toLowerCase().replace(/\s+/g, "-")
+  return (
+    <div className="flex items-start justify-between gap-4 rounded-xl border border-slate-200 bg-white p-4">
+      <div className="flex-1">
+        <Label htmlFor={id} className="text-sm font-semibold text-slate-900">
+          {title}
+        </Label>
+        <p className="mt-1 text-sm text-slate-600">{description}</p>
+      </div>
+      <Switch
+        id={id}
+        checked={checked}
+        disabled={disabled}
+        onCheckedChange={onChange}
+        className="mt-1"
+      />
+    </div>
   )
 }
