@@ -199,6 +199,14 @@ export default function GuestExperience() {
                 Software. Self-Order, Self-Checkout und Spenden laufen auf einer
                 Basis.
               </p>
+              <div className="mt-5">
+                <LiveDemo
+                  url="https://kiosk.sotkiosk.com/donation/bee9a6aa-6239-4368-916b-f50f44fb8941/bf12fecc-114e-43ee-b23f-8f865ae8330c"
+                  title="SOTKIOSK Spenden-Kiosk – Live-Demo"
+                  label="Spenden-Demo ansehen"
+                  className="h-11 px-5 text-sm"
+                />
+              </div>
             </div>
           </div>
         </Reveal>
