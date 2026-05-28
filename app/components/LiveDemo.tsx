@@ -26,11 +26,15 @@ const NATIVE_W = 1920
 const NATIVE_H = 1080
 
 export default function LiveDemo({
+  url = DEMO_URL,
   label = "Live-Demo starten",
+  title = "SOTKIOSK Live-Demo",
   tone = "cyan",
   className,
 }: {
+  url?: string
   label?: string
+  title?: string
   tone?: "cyan" | "outline"
   className?: string
 }) {
@@ -71,9 +75,7 @@ export default function LiveDemo({
       </DialogTrigger>
 
       <DialogContent className="w-auto max-w-none border-0 bg-transparent p-0 shadow-none [&>button]:!opacity-90 [&>button]:!text-white">
-        <DialogTitle className="sr-only">
-          SOTKIOSK Live-Demo – echte Self-Order Oberfläche
-        </DialogTitle>
+        <DialogTitle className="sr-only">{title}</DialogTitle>
 
         <div
           className="overflow-hidden rounded-[1.4rem] border-[6px] border-slate-950 bg-slate-950 shadow-elevated"
@@ -85,8 +87,8 @@ export default function LiveDemo({
         >
           {open && scale > 0 ? (
             <iframe
-              src={DEMO_URL}
-              title="SOTKIOSK Live-Demo"
+              src={url}
+              title={title}
               width={NATIVE_W}
               height={NATIVE_H}
               loading="lazy"
@@ -109,7 +111,7 @@ export default function LiveDemo({
 
         <div className="mt-3 flex items-center justify-center">
           <a
-            href={DEMO_URL}
+            href={url}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20"

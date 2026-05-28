@@ -12,24 +12,33 @@ import {
   type LucideIcon,
 } from "lucide-react"
 import Reveal from "@/components/Reveal"
+import LiveDemo from "./LiveDemo"
 
 const modules: {
   icon: LucideIcon
   title: string
   text: string
   tag: string
+  demoUrl?: string
+  demoTitle?: string
 }[] = [
   {
     icon: MonitorCheck,
     title: "Küchen-Display (KDS)",
     text: "Bestellungen erscheinen in Echtzeit in der Küche – mit Status, Filtern und anpassbarem Layout. Keine verlorenen Bons.",
     tag: "Echtzeit · WebSocket",
+    demoUrl:
+      "https://kiosk.sotkiosk.com/kitchen-display/6e148ec7-34b9-4318-922a-0b724054e3cb",
+    demoTitle: "SOTKIOSK Küchen-Display (KDS) – Live-Demo",
   },
   {
     icon: Tv,
     title: "Gäste- & TV-Display",
     text: "Fertige Bestellnummern werden auf dem Bildschirm aufgerufen – mit Animation und Tonsignal für klare Abholung.",
     tag: "Aufruf-Anzeige",
+    demoUrl:
+      "https://kiosk.sotkiosk.com/tv-display/7647cb27-2179-4e7e-89ff-2596f1441979",
+    demoTitle: "SOTKIOSK Gäste- & TV-Display – Live-Demo",
   },
   {
     icon: Gift,
@@ -117,6 +126,15 @@ export default function SystemModules() {
               <p className="mt-3 text-sm leading-7 text-slate-300">
                 {module.text}
               </p>
+              {module.demoUrl && (
+                <LiveDemo
+                  url={module.demoUrl}
+                  title={module.demoTitle}
+                  label="Live ansehen"
+                  tone="outline"
+                  className="mt-5 h-11 px-5 text-sm"
+                />
+              )}
             </Reveal>
           ))}
         </div>
