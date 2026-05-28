@@ -1,4 +1,5 @@
 import { Building2, ShoppingBag, UtensilsCrossed } from "lucide-react"
+import Reveal from "@/components/Reveal"
 
 const industries = [
   {
@@ -24,7 +25,7 @@ const industries = [
 export default function Industries() {
   return (
     <section id="industries" className="section bg-slate-950 text-white">
-      <div className="container">
+      <Reveal className="container">
         <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
           <div>
             <p className="section-label text-cyan-300">Für Branchen gemacht</p>
@@ -64,7 +65,7 @@ export default function Industries() {
             ))}
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

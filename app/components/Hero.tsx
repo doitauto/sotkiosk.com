@@ -54,7 +54,7 @@ export default function Hero() {
             <h1 className="text-balance font-display text-5xl font-black leading-[0.92] tracking-[-0.08em] text-white sm:text-6xl lg:text-7xl xl:text-8xl">
               Self-Order Software für{" "}
               <span className="bg-gradient-to-r from-cyan-300 to-emerald-300 bg-clip-text text-transparent">
-                Liviao Kiosks.
+                SOT.KIOSK Kiosks.
               </span>
             </h1>
 
@@ -108,8 +108,8 @@ export default function Hero() {
             <div className="relative grid gap-5 lg:grid-cols-[1fr_12rem]">
               <div className="relative mx-auto w-full max-w-[24rem]">
                 <img
-                  src="/kiosk-assets/liviao-hero-kiosk.png"
-                  alt="Liviao-kompatibler Self-Service Kiosk mit SOTKIOSK Bestelloberfläche"
+                  src="/kiosk-assets/sot-kiosk-hero-kiosk.png"
+                  alt="SOT.KIOSK Self-Service Kiosk mit SOTKIOSK Bestelloberfläche"
                   className="relative z-10 h-auto w-full [mask-image:radial-gradient(ellipse_at_center,black_62%,transparent_100%)] drop-shadow-[0_44px_80px_rgba(0,0,0,0.55)]"
                 />
                 <div className="absolute inset-x-10 bottom-3 h-10 rounded-full bg-black/70 blur-2xl" />

@@ -15,8 +15,9 @@ import Logo from "./Logo"
 
 const navItems = [
   { href: "/#software", label: "Software" },
+  { href: "/#erlebnis", label: "Erlebnis" },
   { href: "/#devices", label: "Geräte" },
-  { href: "/#industries", label: "Branchen" },
+  { href: "/#system", label: "System" },
   { href: "/#pricing", label: "Preise" },
   { href: "/#contact", label: "Kontakt" },
 ]

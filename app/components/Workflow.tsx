@@ -1,4 +1,5 @@
 import { ArrowRight, Database, MonitorCog, Printer, Smartphone } from "lucide-react"
+import Reveal from "@/components/Reveal"
 
 const steps = [
   {
@@ -26,7 +27,7 @@ const steps = [
 export default function Workflow() {
   return (
     <section id="workflow" className="section bg-white">
-      <div className="container">
+      <Reveal className="container">
         <div className="mx-auto max-w-3xl text-center">
           <p className="section-label justify-center">Prozess</p>
           <h2 className="mt-4 text-balance font-display text-4xl font-black leading-tight tracking-[-0.07em] text-slate-950 sm:text-5xl">
@@ -61,7 +62,7 @@ export default function Workflow() {
             </div>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

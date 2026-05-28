@@ -4,12 +4,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import Reveal from "@/components/Reveal"
 
 const faqs = [
   {
     question: "Welche Hardware wird unterstützt?",
     answer:
-      "SOTKIOSK ist für moderne Touch-Terminals mit Payment, Drucker und QR/NFC-Prozessen ausgelegt. Liviao-kompatible Geräte werden als Plattform eingeplant; die konkrete Konfiguration prüfen wir vor dem Angebot.",
+      "SOTKIOSK ist für moderne SOT.KIOSK Touch-Terminals mit Payment, Drucker und QR/NFC-Prozessen ausgelegt. Die konkrete Konfiguration prüfen wir vor dem Angebot.",
   },
   {
     question: "Kann SOTKIOSK mit meinem Kassensystem arbeiten?",
@@ -36,12 +37,22 @@ const faqs = [
     answer:
       "Ja. Die Website zeigt die aktuellen Einstiegspunkte: Software ab 299 € pro Monat und Gerätepakete ab 4.999 € Kauf. Der finale Preis hängt von Konfiguration und Integration ab.",
   },
+  {
+    question: "In welchen Sprachen läuft die Bestelloberfläche?",
+    answer:
+      "Standardmäßig Deutsch, Englisch und Türkisch – pro Standort umschaltbar. Weitere Sprachen sind auf Anfrage möglich.",
+  },
+  {
+    question: "Gibt es ein Küchen- und Gäste-Display?",
+    answer:
+      "Ja. Bestellungen erscheinen in Echtzeit auf dem Küchen-Display (KDS); fertige Bestellnummern werden auf einem Gäste- oder TV-Display aufgerufen – inklusive Tonsignal.",
+  },
 ]
 
 export default function FAQ() {
   return (
     <section id="faq" className="section section-warm">
-      <div className="container">
+      <Reveal className="container">
         <div className="mx-auto max-w-3xl text-center">
           <p className="section-label justify-center">Häufige Fragen</p>
           <h2 className="mt-4 text-balance font-display text-4xl font-black leading-tight tracking-[-0.07em] text-slate-950 sm:text-5xl">
@@ -71,7 +82,7 @@ export default function FAQ() {
             ))}
           </Accordion>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

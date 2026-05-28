@@ -85,7 +85,7 @@ export default function Software() {
             <div className="absolute inset-x-8 bottom-0 h-16 rounded-full bg-slate-950/20 blur-3xl" />
             <img
               src="/kiosk-assets/software-terminal-kiosk.png"
-              alt="SOTKIOSK Terminal-Bestelloberfläche auf einem Liviao-kompatiblen Kiosk"
+              alt="SOTKIOSK Terminal-Bestelloberfläche auf einem SOT.KIOSK Kiosk"
               className="relative h-auto w-full max-w-none object-contain drop-shadow-[0_30px_70px_rgba(15,23,42,0.22)]"
             />
           </div>

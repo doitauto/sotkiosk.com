@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Check, Cloud, Layers3, ServerCog } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import Reveal from "@/components/Reveal"
 
 const packages = [
   {
@@ -54,7 +55,7 @@ const packages = [
 export default function Pricing() {
   return (
     <section id="pricing" className="section bg-slate-950 text-white">
-      <div className="container">
+      <Reveal className="container">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
           <div>
             <p className="section-label text-cyan-300">Software + Gerätepakete</p>
@@ -126,7 +127,7 @@ export default function Pricing() {
             <Link href="#contact">Demo & Angebot anfragen</Link>
           </Button>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }
