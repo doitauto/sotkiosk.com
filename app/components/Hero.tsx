@@ -10,6 +10,7 @@ import {
   ShieldCheck,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import LiveDemo from "./LiveDemo"
 
 const featureStrip = [
   { icon: ReceiptText, label: "Intuitive Menüführung" },
@@ -75,17 +76,7 @@ export default function Hero() {
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="h-14 rounded-2xl border-white/25 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur hover:bg-white/10 hover:text-white"
-              >
-                <Link href="#devices">
-                  Geräte ansehen
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </Button>
+              <LiveDemo tone="outline" />
             </div>
 
             <div className="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">

@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Reveal from "@/components/Reveal"
+import LiveDemo from "./LiveDemo"
 
 type OrderType = "vorort" | "mitnehmen"
 
@@ -92,6 +93,12 @@ export default function GuestExperience() {
             mehreren Sprachen und im Look Ihrer Marke. Echte Oberflächen aus dem
             laufenden Betrieb.
           </p>
+          <div className="mt-8 flex flex-col items-center gap-2">
+            <LiveDemo label="Live-Demo starten" />
+            <span className="text-xs font-medium text-slate-500">
+              Echte App – direkt im Browser bedienbar.
+            </span>
+          </div>
         </Reveal>
 
         <div className="mt-14 grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
