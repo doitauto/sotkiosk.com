@@ -19,9 +19,9 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 const SITE_URL = 'https://sotkiosk.com'
-const SITE_TITLE = 'SOTKIOSK – Self-Order Software für SOT.KIOSK Kiosks'
+const SITE_TITLE = 'SOTKIOSK – Self-Order Hardware & Software'
 const SITE_DESCRIPTION =
-  'Premium Self-Order Software für moderne Touch-Terminals: Menüführung, Payment, Kassen-Anbindung und Standortverwaltung für Gastronomie, Kantinen und Retail.'
+  'Self-Order Hardware & Software von SOTKIOSK: moderne Touch-Terminals mit Menüführung, Payment, Kassen-Anbindung und Standortverwaltung für Gastronomie, Kantinen und Retail.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
