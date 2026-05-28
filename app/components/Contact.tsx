@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react"
+import { useState, type ChangeEvent, type FormEvent } from "react"
+import { Building2, Mail, MapPin, Phone, Send } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,22 +12,41 @@ import { Label } from "@/components/ui/label"
 const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY
 const RECIPIENT_EMAIL = "info@doitauto.de"
 
+type ContactFormData = {
+  name: string
+  email: string
+  company: string
+  locations: string
+  interest: string
+  message: string
+}
+
+type Web3FormsResponse = {
+  success: boolean
+  message?: string
+}
+
+const initialFormData: ContactFormData = {
+  name: "",
+  email: "",
+  company: "",
+  locations: "",
+  interest: "Demo & Angebot",
+  message: "",
+}
+
 export default function Contact() {
   const [submitting, setSubmitting] = useState(false)
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    message: "",
-  })
+  const [formData, setFormData] = useState<ContactFormData>(initialFormData)
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    setFormData((current) => ({ ...current, [name]: value }))
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSubmitting(true)
 
@@ -34,28 +54,30 @@ export default function Contact() {
       try {
         const payload = new FormData()
         payload.append("access_key", WEB3FORMS_KEY)
-        payload.append("subject", `Anfrage von ${formData.name} – SOTKIOSK`)
+        payload.append("subject", `Anfrage von ${formData.name} - SOTKIOSK`)
         payload.append("from_name", formData.name)
         payload.append("name", formData.name)
         payload.append("email", formData.email)
         payload.append("company", formData.company)
+        payload.append("locations", formData.locations)
+        payload.append("interest", formData.interest)
         payload.append("message", formData.message)
 
         const res = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
           body: payload,
         })
-        const data = await res.json()
+        const data = (await res.json()) as Web3FormsResponse
 
-        if (data.success) {
-          toast.success("Nachricht gesendet", {
-            description: "Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
-          })
-          setFormData({ name: "", email: "", company: "", message: "" })
-        } else {
+        if (!res.ok || !data.success) {
           throw new Error(data.message || "Versand fehlgeschlagen")
         }
-      } catch (err) {
+
+        toast.success("Nachricht gesendet", {
+          description: "Wir prüfen Ihre Anfrage und melden uns mit den nächsten Schritten.",
+        })
+        setFormData(initialFormData)
+      } catch {
         toast.error("Versand fehlgeschlagen", {
           description: "Bitte schreiben Sie uns direkt an info@doitauto.de.",
         })
@@ -65,9 +87,18 @@ export default function Contact() {
       return
     }
 
-    const subject = encodeURIComponent(`Anfrage von ${formData.name}`)
+    const subject = encodeURIComponent(`SOTKIOSK Anfrage von ${formData.name}`)
     const body = encodeURIComponent(
-      `Name: ${formData.name}\nE-Mail: ${formData.email}\nUnternehmen: ${formData.company}\n\nNachricht:\n${formData.message}`,
+      [
+        `Name: ${formData.name}`,
+        `E-Mail: ${formData.email}`,
+        `Unternehmen: ${formData.company}`,
+        `Standortanzahl: ${formData.locations}`,
+        `Interesse: ${formData.interest}`,
+        "",
+        "Nachricht:",
+        formData.message,
+      ].join("\n"),
     )
     window.location.href = `mailto:${RECIPIENT_EMAIL}?subject=${subject}&body=${body}`
     toast.info("E-Mail-Programm wird geöffnet", {
@@ -77,53 +108,48 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="section section-alt">
+    <section id="contact" className="section bg-slate-950 pt-0 text-white">
       <div className="container">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">Kontakt</span>
-          <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-            Lassen Sie uns über Ihr Projekt sprechen
-          </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            Schreiben Sie uns oder rufen Sie an – wir melden uns innerhalb von
-            24 Stunden mit einem konkreten Vorschlag.
-          </p>
-        </div>
+        <div className="relative overflow-hidden rounded-[2.4rem] border border-white/10 bg-[radial-gradient(circle_at_88%_18%,rgba(34,211,238,0.18),transparent_34%),linear-gradient(135deg,#020617,#101827)] p-5 shadow-[0_40px_120px_rgba(0,0,0,0.42)] md:p-8 lg:p-10">
+          <div className="grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
+            <div className="flex h-full flex-col justify-between">
+              <div>
+                <p className="section-label text-cyan-300">
+                  Persönlich & unverbindlich
+                </p>
+                <h2 className="mt-4 text-balance font-display text-4xl font-black leading-tight tracking-[-0.07em] text-white sm:text-6xl">
+                  Demo & Angebot anfragen.
+                </h2>
+                <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">
+                  Erzählen Sie uns von Standort, Kasse und gewünschter Hardware.
+                  Wir prüfen, welches Software- und Gerätepaket technisch passt.
+                </p>
+              </div>
 
-        <div className="mx-auto mt-16 grid max-w-6xl gap-8 lg:grid-cols-5">
-          <aside className="space-y-6 lg:col-span-2">
-            <ContactItem
-              icon={Phone}
-              title="Telefon"
-              value="07336 8543"
-              href="tel:+4973368543"
-              detail="Mo – Fr, 8:00 – 17:00 Uhr"
-            />
-            <ContactItem
-              icon={Mail}
-              title="E-Mail"
-              value="info@doitauto.de"
-              href="mailto:info@doitauto.de"
-              detail="Antwort innerhalb von 24 Stunden"
-            />
-            <ContactItem
-              icon={MapPin}
-              title="Adresse"
-              value="Hauptstr. 18, 89173 Lonsee"
-              detail="Süddeutschland, nahe Ulm"
-            />
-            <ContactItem
-              icon={Clock}
-              title="Geschäftszeiten"
-              value="Montag bis Freitag"
-              detail="8:00 – 17:00 Uhr"
-            />
-          </aside>
+              <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+                <ContactItem
+                  icon={Mail}
+                  title="E-Mail"
+                  value="info@doitauto.de"
+                  href="mailto:info@doitauto.de"
+                />
+                <ContactItem
+                  icon={Phone}
+                  title="Telefon"
+                  value="07336 8543"
+                  href="tel:+4973368543"
+                />
+                <ContactItem
+                  icon={MapPin}
+                  title="Adresse"
+                  value="Hauptstr. 18, 89173 Lonsee"
+                />
+              </div>
+            </div>
 
-          <div className="lg:col-span-3">
             <form
               onSubmit={handleSubmit}
-              className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card sm:p-8"
+              className="rounded-[2rem] border border-slate-200 bg-white p-5 text-slate-950 shadow-elevated sm:p-7"
             >
               <input
                 type="checkbox"
@@ -156,19 +182,45 @@ export default function Contact() {
                 />
               </div>
 
-              <div className="mt-5">
+              <div className="mt-5 grid gap-5 sm:grid-cols-2">
                 <Field
                   id="company"
                   label="Unternehmen"
                   value={formData.company}
                   onChange={handleChange}
-                  placeholder="Ihr Unternehmen (optional)"
+                  placeholder="Ihr Unternehmen"
                   autoComplete="organization"
+                />
+                <Field
+                  id="locations"
+                  label="Standortanzahl"
+                  value={formData.locations}
+                  onChange={handleChange}
+                  placeholder="z. B. 1, 3 oder 20+"
                 />
               </div>
 
               <div className="mt-5">
-                <Label htmlFor="message" className="text-sm font-medium text-slate-700">
+                <Label htmlFor="interest" className="text-sm font-bold text-slate-800">
+                  Interesse
+                </Label>
+                <select
+                  id="interest"
+                  name="interest"
+                  value={formData.interest}
+                  onChange={handleChange}
+                  className="mt-1.5 h-12 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none ring-offset-white transition focus-visible:ring-2 focus-visible:ring-cyan-400"
+                >
+                  <option>Demo & Angebot</option>
+                  <option>Software Lizenz</option>
+                  <option>Gerätepaket</option>
+                  <option>Projekt Rollout</option>
+                  <option>Integration prüfen</option>
+                </select>
+              </div>
+
+              <div className="mt-5">
+                <Label htmlFor="message" className="text-sm font-bold text-slate-800">
                   Nachricht <span className="text-red-500">*</span>
                 </Label>
                 <Textarea
@@ -178,31 +230,31 @@ export default function Contact() {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Erzählen Sie kurz von Ihrem Standort und Ihren Anforderungen."
-                  className="mt-1.5 resize-none"
+                  placeholder="Beschreiben Sie kurz Standort, Kassensystem, gewünschte Hardware und Zeitplan."
+                  className="mt-1.5 resize-none rounded-xl"
                 />
               </div>
 
               <Button
                 type="submit"
                 size="lg"
-                className="mt-6 w-full sm:w-auto"
+                className="mt-6 h-14 w-full rounded-2xl bg-slate-950 font-extrabold text-white hover:bg-slate-800 sm:w-auto"
                 disabled={submitting}
               >
                 {submitting ? (
                   <>
                     <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                    Wird gesendet…
+                    Wird gesendet
                   </>
                 ) : (
                   <>
                     <Send className="h-4 w-4" />
-                    Nachricht senden
+                    Demo & Angebot anfragen
                   </>
                 )}
               </Button>
 
-              <p className="mt-4 text-xs text-slate-500">
+              <p className="mt-4 text-xs leading-5 text-slate-500">
                 Mit dem Absenden stimmen Sie unserer{" "}
                 <a href="/datenschutz" className="underline hover:text-slate-700">
                   Datenschutzerklärung
@@ -221,35 +273,34 @@ function ContactItem({
   icon: Icon,
   title,
   value,
-  detail,
   href,
 }: {
-  icon: React.ComponentType<{ className?: string }>
+  icon: LucideIcon
   title: string
   value: string
-  detail?: string
   href?: string
 }) {
-  const ValueTag = href ? "a" : "p"
+  const content = (
+    <>
+      <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">
+        {title}
+      </p>
+      <p className="mt-1 text-sm font-semibold text-white">{value}</p>
+    </>
+  )
+
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
-      <div className="flex items-start gap-4">
-        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 ring-1 ring-inset ring-blue-100">
-          <Icon className="h-5 w-5" />
-        </div>
-        <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
-            {title}
-          </p>
-          <ValueTag
-            {...(href ? { href } : {})}
-            className={`mt-1 text-sm font-semibold text-slate-900 ${href ? "hover:text-blue-600" : ""}`}
-          >
-            {value}
-          </ValueTag>
-          {detail && <p className="mt-0.5 text-xs text-slate-500">{detail}</p>}
-        </div>
+    <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.06] p-4">
+      <div className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-cyan-300/10 text-cyan-300">
+        <Icon className="h-5 w-5" />
       </div>
+      {href ? (
+        <a href={href} className="hover:text-cyan-200">
+          {content}
+        </a>
+      ) : (
+        <div>{content}</div>
+      )}
     </div>
   )
 }
@@ -264,18 +315,20 @@ function Field({
   placeholder,
   autoComplete,
 }: {
-  id: string
+  id: keyof ContactFormData
   label: string
   type?: string
   required?: boolean
   value: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => void
   placeholder?: string
   autoComplete?: string
 }) {
   return (
     <div>
-      <Label htmlFor={id} className="text-sm font-medium text-slate-700">
+      <Label htmlFor={id} className="text-sm font-bold text-slate-800">
         {label} {required && <span className="text-red-500">*</span>}
       </Label>
       <Input
@@ -287,7 +340,7 @@ function Field({
         onChange={onChange}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        className="mt-1.5"
+        className="mt-1.5 h-12 rounded-xl border-slate-200"
       />
     </div>
   )

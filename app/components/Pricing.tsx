@@ -1,138 +1,131 @@
 import Link from "next/link"
-import { Check } from "lucide-react"
+import { Check, Cloud, Layers3, ServerCog } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 
-const tiers = [
+const packages = [
   {
-    name: "Miete",
+    icon: Cloud,
+    number: "01",
+    name: "Software Lizenz",
     price: "ab 299 €",
     cadence: "/Monat",
-    description:
-      "Flexibel starten ohne hohe Anfangsinvestition. Ideal für einzelne Standorte und Testphasen.",
+    description: "Für bestehende Hardware oder Ihre IT-Umgebung.",
     features: [
-      "Terminal-Hardware inklusive",
-      "Software-Updates inklusive",
-      "Standard-Support per Mail",
-      "Monatlich kündbar nach 12 Monaten",
-      "Austauschgerät bei Defekt",
+      "SOTKIOSK Software",
+      "Regelmäßige Updates",
+      "Remote-Support",
+      "Backend & Auswertungen",
     ],
-    cta: "Beratung anfragen",
-    href: "#contact",
     highlighted: false,
   },
   {
-    name: "Kauf",
+    icon: ServerCog,
+    number: "02",
+    name: "Gerätepaket",
     price: "ab 4.999 €",
-    cadence: "einmalig",
-    description:
-      "Dauerhaft im eigenen Besitz. Die wirtschaftlichste Lösung ab dem zweiten Jahr.",
+    cadence: "Kauf",
+    description: "Kiosk-Hardware inklusive Software - sofort einsatzbereit.",
     features: [
-      "Einmalige Investition, dauerhafter Besitz",
-      "24 Monate Garantie auf die Hardware",
-      "Software-Lizenz inklusive",
-      "Priority-Support per Telefon",
-      "Vor-Ort-Installation buchbar",
+      "Premium Kiosk-Hardware",
+      "SOTKIOSK Software inklusive",
+      "Lieferung & Einrichtung",
+      "Einweisung & Inbetriebnahme",
     ],
-    cta: "Beratung anfragen",
-    href: "#contact",
     highlighted: true,
-    badge: "Beliebt",
   },
   {
-    name: "Enterprise",
+    icon: Layers3,
+    number: "03",
+    name: "Projekt Rollout",
     price: "auf Anfrage",
     cadence: "",
-    description:
-      "Für Ketten, Filialisten und individuelle Integrationen mit mehreren Standorten.",
+    description: "Für Multi-Standort Rollouts und individuelle Anforderungen.",
     features: [
-      "Mehrere Standorte zentral verwalten",
-      "Custom-Integration mit ERP/POS",
-      "Dedizierter Account-Manager",
-      "SLA mit garantierter Reaktionszeit",
-      "Schulung Ihres Personals",
+      "Individuelle Projektplanung",
+      "Standort-Rollout",
+      "Schnittstellen & Integration",
+      "Persönliche Abstimmung",
     ],
-    cta: "Kontakt aufnehmen",
-    href: "#contact",
     highlighted: false,
   },
 ]
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="section">
+    <section id="pricing" className="section bg-slate-950 text-white">
       <div className="container">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">Preise</span>
-          <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-            Transparente Preise – passend zu Ihrem Modell
-          </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            Mieten, kaufen oder individuell konfigurieren – wir finden gemeinsam
-            das Modell, das zu Ihrem Standort passt.
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+          <div>
+            <p className="section-label text-cyan-300">Software + Gerätepakete</p>
+            <h2 className="mt-4 text-balance font-display text-4xl font-black leading-tight tracking-[-0.07em] text-white sm:text-6xl">
+              Die passende Lösung für Ihren Standort.
+            </h2>
+          </div>
+          <p className="max-w-2xl text-lg leading-8 text-slate-300 lg:ml-auto">
+            Modular, skalierbar und für den täglichen Einsatz entwickelt. Wählen
+            Sie das passende Paket - wir kümmern uns um den Rest.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
-          {tiers.map((tier) => (
-            <div
-              key={tier.name}
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          {packages.map((item) => (
+            <article
+              key={item.name}
               className={cn(
-                "relative flex flex-col rounded-2xl border bg-white p-8 transition-all duration-200",
-                tier.highlighted
-                  ? "border-blue-600 shadow-elevated ring-1 ring-blue-600"
-                  : "border-slate-200 shadow-soft hover:shadow-card",
+                "rounded-[1.7rem] border bg-white/[0.04] p-6 transition duration-300",
+                item.highlighted
+                  ? "border-cyan-300 shadow-[0_0_0_1px_rgba(103,232,249,0.4),0_24px_80px_rgba(34,211,238,0.18)]"
+                  : "border-white/14 hover:border-white/30",
               )}
             >
-              {tier.highlighted && tier.badge && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 hover:bg-blue-600">
-                  {tier.badge}
-                </Badge>
-              )}
-
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900">
-                  {tier.name}
-                </h3>
-                <p className="mt-2 text-sm text-slate-600">{tier.description}</p>
+              <div className="grid h-12 w-12 place-items-center rounded-2xl border border-cyan-300/35 bg-cyan-300/10 text-cyan-300">
+                <item.icon className="h-5 w-5" />
               </div>
+              <p className="mt-7 text-sm font-bold text-cyan-300">
+                {item.number}
+              </p>
+              <h3 className="mt-2 text-2xl font-bold tracking-tight text-white">
+                {item.name}
+              </h3>
+              <p className="mt-3 min-h-12 text-sm leading-6 text-slate-300">
+                {item.description}
+              </p>
 
-              <div className="mt-6 flex items-baseline gap-1">
-                <span className="text-4xl font-semibold tracking-tight text-slate-900">
-                  {tier.price}
-                </span>
-                {tier.cadence && (
-                  <span className="text-sm text-slate-500">{tier.cadence}</span>
-                )}
-              </div>
-
-              <ul className="mt-6 space-y-3 text-sm">
-                {tier.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3">
-                    <span className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-blue-50 text-blue-600">
-                      <Check className="h-3 w-3" />
+              <div className="mt-6 border-t border-white/14 pt-6">
+                <div className="flex items-end gap-2">
+                  <span className="text-4xl font-black tracking-tight text-cyan-300">
+                    {item.price}
+                  </span>
+                  {item.cadence && (
+                    <span className="pb-1 text-sm text-slate-300">
+                      {item.cadence}
                     </span>
-                    <span className="text-slate-700">{feature}</span>
+                  )}
+                </div>
+              </div>
+
+              <ul className="mt-6 space-y-3 text-sm text-slate-200">
+                {item.features.map((feature) => (
+                  <li key={feature} className="flex gap-3">
+                    <Check className="mt-0.5 h-4 w-4 flex-none text-cyan-300" />
+                    <span>{feature}</span>
                   </li>
                 ))}
               </ul>
-
-              <Button
-                asChild
-                variant={tier.highlighted ? "default" : "outline"}
-                className="mt-8 w-full"
-                size="lg"
-              >
-                <Link href={tier.href}>{tier.cta}</Link>
-              </Button>
-            </div>
+            </article>
           ))}
         </div>
 
-        <p className="mt-8 text-center text-sm text-slate-500">
-          Alle Preise zzgl. MwSt. Installation und Schulung optional buchbar.
-        </p>
+        <div className="mt-10 flex flex-col items-start justify-between gap-5 rounded-[1.6rem] border border-white/10 bg-white/[0.04] p-5 sm:flex-row sm:items-center">
+          <p className="text-sm leading-6 text-slate-300">
+            Alle Pakete sind kombinierbar und werden vor Angebotserstellung auf
+            Standort, Hardware und Integrationen abgestimmt.
+          </p>
+          <Button asChild className="rounded-full bg-cyan-300 px-6 font-extrabold text-slate-950 hover:bg-cyan-200">
+            <Link href="#contact">Demo & Angebot anfragen</Link>
+          </Button>
+        </div>
       </div>
     </section>
   )

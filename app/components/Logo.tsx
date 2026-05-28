@@ -1,12 +1,9 @@
-"use client"
-
-import { useState } from "react"
-
 type Props = {
   width?: number
   height?: number
   className?: string
   alt?: string
+  variant?: "light" | "dark"
 }
 
 export default function Logo({
@@ -14,29 +11,23 @@ export default function Logo({
   height = 32,
   className = "",
   alt = "SOTKIOSK",
+  variant = "dark",
 }: Props) {
-  const [error, setError] = useState(false)
-
-  if (error) {
-    return (
-      <span
-        className={`inline-flex items-baseline font-semibold tracking-tight text-slate-900 ${className}`}
-      >
-        <span className="text-blue-600">SOT</span>
-        <span>KIOSK</span>
-      </span>
-    )
-  }
+  const textColor = variant === "light" ? "text-white" : "text-slate-950"
 
   return (
-    <img
-      src="/logo/sotkiosk-logo.svg"
-      width={width}
-      height={height}
-      alt={alt}
+    <span
+      role="img"
+      aria-label={alt}
       className={className}
-      onError={() => setError(true)}
-      style={{ objectFit: "contain" }}
-    />
+      style={{ width, height }}
+    >
+      <span
+        className={`inline-flex h-full items-center font-display text-[1.35rem] font-black uppercase leading-none tracking-[-0.08em] ${textColor}`}
+      >
+        <span>SOT</span>
+        <span className="text-cyan-400">KIOSK</span>
+      </span>
+    </span>
   )
 }

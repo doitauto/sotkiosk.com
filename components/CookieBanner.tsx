@@ -46,10 +46,10 @@ export default function CookieBanner() {
   if (showSettings) {
     return (
       <div className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/40 backdrop-blur-sm sm:items-center sm:p-4">
-        <div className="relative w-full max-w-2xl rounded-t-2xl border border-slate-200 bg-white shadow-elevated sm:rounded-2xl">
+        <div className="relative w-full max-w-2xl rounded-t-[1.6rem] border border-slate-200 bg-white shadow-elevated sm:rounded-[1.6rem]">
           <div className="flex items-start justify-between border-b border-slate-200 px-6 py-5">
             <div>
-              <h2 className="text-lg font-semibold text-slate-900">
+              <h2 className="font-display text-xl font-black tracking-[-0.05em] text-slate-950">
                 Cookie-Einstellungen
               </h2>
               <p className="mt-1 text-sm text-slate-600">
@@ -77,20 +77,24 @@ export default function CookieBanner() {
               description="Ermöglichen erweiterte Funktionen und Personalisierung."
               checked={preferences.functional}
               onChange={(v) =>
-                setPreferences({ ...preferences, functional: v })
+                setPreferences((current) => ({ ...current, functional: v }))
               }
             />
             <CookieRow
               title="Analytische Cookies"
               description="Helfen uns zu verstehen, wie die Website genutzt wird."
               checked={preferences.analytics}
-              onChange={(v) => setPreferences({ ...preferences, analytics: v })}
+              onChange={(v) =>
+                setPreferences((current) => ({ ...current, analytics: v }))
+              }
             />
             <CookieRow
               title="Marketing-Cookies"
               description="Werden für personalisierte Werbung verwendet."
               checked={preferences.marketing}
-              onChange={(v) => setPreferences({ ...preferences, marketing: v })}
+              onChange={(v) =>
+                setPreferences((current) => ({ ...current, marketing: v }))
+              }
             />
           </div>
 
@@ -98,7 +102,10 @@ export default function CookieBanner() {
             <Button variant="outline" onClick={() => setShowSettings(false)}>
               Abbrechen
             </Button>
-            <Button onClick={() => saveAndClose(preferences)}>
+            <Button
+              onClick={() => saveAndClose(preferences)}
+              className="bg-slate-950 text-white hover:bg-slate-800"
+            >
               Einstellungen speichern
             </Button>
           </div>
@@ -108,22 +115,22 @@ export default function CookieBanner() {
   }
 
   return (
-    <div className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-white p-5 shadow-elevated sm:p-6">
+    <div className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-4xl rounded-[1.6rem] border border-white/10 bg-slate-950/92 p-5 text-white shadow-[0_30px_100px_rgba(0,0,0,0.42)] backdrop-blur-xl sm:p-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-start gap-3">
-          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl border border-cyan-300/30 bg-cyan-300/10 text-cyan-300">
             <Cookie className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-sm font-semibold text-slate-900">
+            <p className="text-sm font-bold text-white">
               Wir verwenden Cookies
             </p>
-            <p className="mt-1 text-sm text-slate-600">
+            <p className="mt-1 text-sm leading-6 text-slate-300">
               Einige sind notwendig, andere helfen uns die Website zu
               verbessern.{" "}
               <Link
                 href="/cookies"
-                className="font-medium text-blue-600 underline-offset-4 hover:underline"
+                className="font-semibold text-cyan-300 underline-offset-4 hover:underline"
               >
                 Mehr erfahren
               </Link>
@@ -136,6 +143,7 @@ export default function CookieBanner() {
             variant="ghost"
             size="sm"
             onClick={() => setShowSettings(true)}
+            className="text-slate-200 hover:bg-white/10 hover:text-white"
           >
             <Settings className="h-4 w-4" />
             Einstellungen
@@ -143,6 +151,7 @@ export default function CookieBanner() {
           <Button
             variant="outline"
             size="sm"
+            className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
             onClick={() =>
               saveAndClose({
                 necessary: true,
@@ -156,6 +165,7 @@ export default function CookieBanner() {
           </Button>
           <Button
             size="sm"
+            className="bg-cyan-300 font-bold text-slate-950 hover:bg-cyan-200"
             onClick={() =>
               saveAndClose({
                 necessary: true,

@@ -1,23 +1,29 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Manrope, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import CookieBanner from '../components/CookieBanner'
 import { Toaster } from '@/components/ui/sonner'
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-sans',
+  display: 'swap',
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-display',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
-  title: 'SOTKIOSK – Self-Order-Terminals für Restaurants, Kantinen & Supermärkte',
+  title: 'SOTKIOSK – Self-Order Software für kompatible Liviao Kiosks',
   description:
-    'Self-Order-Terminals mit eigener Software für Restaurants, Kantinen und Supermärkte. Miete ab 299 €/Monat oder Kauf ab 4.999 €. Made in Germany, DSGVO-konform.',
+    'Premium Self-Order Software für moderne Touch-Terminals: Menüführung, Payment, Kassen-Anbindung und Standortverwaltung für Gastronomie, Kantinen und Retail.',
   keywords:
-    'Self-Order-Terminal, Restaurant Kiosk, Supermarkt Terminal, Kantinen Software, SOTKIOSK, Bestellterminal',
+    'Self-Order Software, Liviao Kiosk Software, Restaurant Kiosk, Self Service Terminal, Kantinen Software, SOTKIOSK, Bestellterminal',
 }
 
 export default function RootLayout({
@@ -26,8 +32,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="de" className={inter.variable}>
-      <body className="min-h-screen bg-background font-sans text-foreground antialiased">
+    <html lang="de" className={`${manrope.variable} ${spaceGrotesk.variable}`}>
+      <body className="min-h-screen bg-background font-sans text-foreground antialiased selection:bg-cyan-200 selection:text-slate-950">
         <Header />
         <main className="pt-16">{children}</main>
         <Footer />

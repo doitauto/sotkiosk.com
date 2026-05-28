@@ -1,9 +1,9 @@
 import Hero from "./components/Hero"
-import Features from "./components/Features"
-import Markets from "./components/Markets"
+import Software from "./components/Software"
+import Devices from "./components/Devices"
+import Workflow from "./components/Workflow"
+import Industries from "./components/Industries"
 import Pricing from "./components/Pricing"
-import Testimonials from "./components/Testimonials"
-import About from "./components/About"
 import FAQ from "./components/FAQ"
 import Contact from "./components/Contact"
 
@@ -11,11 +11,11 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Features />
-      <Markets />
+      <Software />
+      <Devices />
+      <Workflow />
+      <Industries />
       <Pricing />
-      <Testimonials />
-      <About />
       <FAQ />
       <Contact />
     </>
