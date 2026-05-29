@@ -49,8 +49,12 @@ export default function LiveDemo({
   useEffect(() => {
     if (!open) return
     const compute = () => {
-      const availW = Math.min(window.innerWidth * 0.94, 1680)
-      const availH = window.innerHeight * 0.82
+      // So groß wie möglich: Breiten-Cap entfernt, damit große Monitore die
+      // volle Fläche nutzen. Höhe lässt ~96px für Footer-Link ("In neuem Tab
+      // öffnen") + dessen mt-3-Abstand + etwas Luft, sonst klebt die Box an
+      // der Viewport-Kante.
+      const availW = window.innerWidth * 0.96
+      const availH = window.innerHeight - 96
       setScale(Math.min(availW / NATIVE_W, availH / NATIVE_H))
     }
     compute()
