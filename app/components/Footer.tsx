@@ -24,6 +24,8 @@ const legalLinks = [
 ]
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer className="border-t border-slate-900 bg-slate-950 text-white">
       <div className="container py-16">
@@ -97,8 +99,8 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-xs text-slate-500 md:flex-row md:items-center">
-          <p>© {new Date().getFullYear()} SOTKIOSK. Alle Rechte vorbehalten.</p>
-          <p>Hauptstr. 18 · 89173 Lonsee · USt-ID DE315503467</p>
+          <p>© {currentYear} SOTKIOSK. Alle Rechte vorbehalten.</p>
+          <p>USt-ID DE315503467</p>
         </div>
       </div>
     </footer>
