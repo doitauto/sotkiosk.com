@@ -39,7 +39,11 @@ export default function LiveDemo({
   className?: string
 }) {
   const [open, setOpen] = useState(false)
-  const [scale, setScale] = useState(0)
+  // scale = optische Verkleinerung (breitenbasiert), frameH = interne
+  // iframe-Viewport-Höhe in CSS-px. frameH füllt die verfügbare Modal-Höhe;
+  // ist der App-Inhalt höher (z.B. scrollbare Spenden-Betragswahl), scrollt
+  // das iframe nativ – nichts wird mehr abgeschnitten.
+  const [{ scale, frameH }, setDims] = useState({ scale: 0, frameH: NATIVE_H })
 
   const toneClasses =
     tone === "outline"
@@ -49,13 +53,16 @@ export default function LiveDemo({
   useEffect(() => {
     if (!open) return
     const compute = () => {
-      // So groß wie möglich: Breiten-Cap entfernt, damit große Monitore die
-      // volle Fläche nutzen. Höhe lässt ~96px für Footer-Link ("In neuem Tab
-      // öffnen") + dessen mt-3-Abstand + etwas Luft, sonst klebt die Box an
-      // der Viewport-Kante.
+      // Breitenbasiertes Scale: App rendert immer im 1920px-TV-/Desktop-
+      // Layout. Nicht über 1:1 hochskalieren (sonst unscharf). availH lässt
+      // ~96px für den Footer-Link + Abstand.
       const availW = window.innerWidth * 0.96
       const availH = window.innerHeight - 96
-      setScale(Math.min(availW / NATIVE_W, availH / NATIVE_H))
+      const nextScale = Math.min(availW / NATIVE_W, 1)
+      // Interne iframe-Höhe so wählen, dass die skalierte Box availH füllt.
+      // Mindestens NATIVE_H, damit kurze Screens nicht gestaucht werden.
+      const nextFrameH = Math.max(Math.round(availH / nextScale), NATIVE_H)
+      setDims({ scale: nextScale, frameH: nextFrameH })
     }
     compute()
     window.addEventListener("resize", compute)
@@ -78,14 +85,14 @@ export default function LiveDemo({
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="w-auto max-w-none border-0 bg-transparent p-0 shadow-none [&>button]:!opacity-90 [&>button]:!text-white">
+      <DialogContent className="w-auto max-w-none border-0 bg-transparent p-0 shadow-none [&>button]:!right-3 [&>button]:!top-3 [&>button]:!grid [&>button]:!h-9 [&>button]:!w-9 [&>button]:!place-items-center [&>button]:!rounded-full [&>button]:!bg-slate-900/70 [&>button]:!text-white [&>button]:!opacity-100 [&>button]:!ring-1 [&>button]:!ring-white/25 [&>button]:!backdrop-blur hover:[&>button]:!bg-slate-900 [&>button>svg]:!h-5 [&>button>svg]:!w-5">
         <DialogTitle className="sr-only">{title}</DialogTitle>
 
         <div
           className="overflow-hidden rounded-[1.4rem] border-[6px] border-slate-950 bg-slate-950 shadow-elevated"
           style={
             scale > 0
-              ? { width: NATIVE_W * scale, height: NATIVE_H * scale }
+              ? { width: NATIVE_W * scale, height: frameH * scale }
               : undefined
           }
         >
@@ -94,7 +101,7 @@ export default function LiveDemo({
               src={url}
               title={title}
               width={NATIVE_W}
-              height={NATIVE_H}
+              height={frameH}
               loading="lazy"
               allow="fullscreen; clipboard-write; payment"
               style={{
