@@ -83,6 +83,9 @@ build_locally() {
   log_info "Installiere npm-Pakete..."
   npm install --legacy-peer-deps
   
+  log_info "Bereinige alte Next.js Build-Artefakte..."
+  rm -rf .next "$LOCAL_BUILD_DIR"
+  
   # Next.js Build ausführen
   log_info "Führe 'npm run build' aus..."
   if ! npm run build; then
