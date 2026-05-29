@@ -19,7 +19,7 @@ export default function Logo({
     <span
       role="img"
       aria-label={alt}
-      className={className}
+      className={`inline-flex items-center ${className}`}
       style={{ width, height }}
     >
       <span
