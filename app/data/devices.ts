@@ -126,15 +126,6 @@ export const devices: Device[] = [
     bestFor: "Platzsparend an der Wand",
   },
   {
-    id: "wandmontage-xl-32",
-    name: "Wandmontage XL 32″",
-    formFactor: "Wandmontage",
-    sizes: ['32"'],
-    image: "/kiosk-assets/alibaba/liviao-wallmount-pair.jpg",
-    features: ["payment", "qrnfc", "scanner"],
-    bestFor: "Eingangsbereiche und Lobbys",
-  },
-  {
     id: "outdoor-27",
     name: "Outdoor Standgerät 27″",
     formFactor: "Outdoor",
