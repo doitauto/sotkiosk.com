@@ -2,8 +2,9 @@ import { Metadata } from "next"
 import LegalLayout from "../../components/LegalLayout"
 
 export const metadata: Metadata = {
-  title: "Datenschutzerklärung – SOTKIOSK",
+  title: "Datenschutzerklärung",
   description: "Datenschutzerklärung von SOTKIOSK gemäß DSGVO",
+  alternates: { canonical: "/datenschutz" },
 }
 
 export default function DatenschutzPage() {

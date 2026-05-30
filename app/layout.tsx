@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Manrope, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Header from './components/Header'
@@ -25,11 +25,24 @@ const SITE_DESCRIPTION =
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: SITE_TITLE,
+  title: {
+    default: SITE_TITLE,
+    template: '%s · SOTKIOSK',
+  },
   description: SITE_DESCRIPTION,
   keywords:
     'Self-Order Software, SOT.KIOSK Kiosk Software, Restaurant Kiosk, Self Service Terminal, Kantinen Software, SOTKIOSK, Bestellterminal, Self-Checkout, Kiosk Hardware',
-  alternates: { canonical: '/' },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   openGraph: {
     type: 'website',
     locale: 'de_DE',
@@ -54,34 +67,66 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  themeColor: '#020617',
+}
+
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'SOTKIOSK',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web, Android',
-  description: SITE_DESCRIPTION,
-  url: SITE_URL,
-  offers: {
-    '@type': 'Offer',
-    price: '4999',
-    priceCurrency: 'EUR',
-    description: 'Gerätepaket Komplett mit 27" oder 32" KIOSK ab 4.999 € Kauf',
-  },
-  publisher: {
-    '@type': 'Organization',
-    name: 'doitauto',
-    url: SITE_URL,
-    email: 'info@doitauto.de',
-    telephone: '+49 7336 8543',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Hauptstr. 18',
-      postalCode: '89173',
-      addressLocality: 'Lonsee',
-      addressCountry: 'DE',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      name: 'SOTKIOSK',
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/icon.svg`,
+      },
+      image: `${SITE_URL}/og.png`,
+      email: 'info@doitauto.de',
+      telephone: '+49 7336 8543',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Hauptstr. 18',
+        postalCode: '89173',
+        addressLocality: 'Lonsee',
+        addressCountry: 'DE',
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        telephone: '+49 7336 8543',
+        email: 'info@doitauto.de',
+        availableLanguage: ['de', 'en', 'tr'],
+      },
     },
-  },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_TITLE,
+      description: SITE_DESCRIPTION,
+      inLanguage: 'de-DE',
+      publisher: { '@id': `${SITE_URL}/#organization` },
+    },
+    {
+      '@type': 'SoftwareApplication',
+      '@id': `${SITE_URL}/#software`,
+      name: 'SOTKIOSK',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web, Android',
+      description: SITE_DESCRIPTION,
+      url: SITE_URL,
+      offers: {
+        '@type': 'Offer',
+        price: '4999',
+        priceCurrency: 'EUR',
+        description: 'Gerätepaket Komplett mit 27" oder 32" KIOSK ab 4.999 € Kauf',
+      },
+      publisher: { '@id': `${SITE_URL}/#organization` },
+    },
+  ],
 }
 
 export default function RootLayout({

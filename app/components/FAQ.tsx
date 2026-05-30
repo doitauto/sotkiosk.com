@@ -49,9 +49,23 @@ const faqs = [
   },
 ]
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+}
+
 export default function FAQ() {
   return (
     <section id="faq" className="section section-warm">
+      <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
       <Reveal className="container">
         <div className="mx-auto max-w-3xl text-center">
           <p className="section-label justify-center">Häufige Fragen</p>
