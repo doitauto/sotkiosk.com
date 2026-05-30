@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Mail, Phone, MapPin } from "lucide-react"
 import Logo from "./Logo"
+import { solutions } from "@/app/data/solutions"
 
 const productLinks = [
   { href: "/#software", label: "Software" },
@@ -8,6 +9,14 @@ const productLinks = [
   { href: "/#industries", label: "Branchen" },
   { href: "/#pricing", label: "Preise" },
   { href: "/#faq", label: "FAQ" },
+]
+
+const solutionLinks = [
+  { href: "/loesungen", label: "Alle Lösungen" },
+  ...solutions.map((solution) => ({
+    href: `/loesungen/${solution.slug}`,
+    label: solution.navLabel,
+  })),
 ]
 
 const companyLinks = [
@@ -49,7 +58,7 @@ export default function Footer() {
   return (
     <footer className="overflow-hidden border-t border-slate-900 bg-slate-950 text-white">
       <div className="container py-12 md:py-14">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]">
           <div>
             <Logo width={148} height={32} variant="light" className="h-8 w-[148px]" />
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-400 md:text-base">
@@ -58,6 +67,19 @@ export default function Footer() {
               Gastronomie, Kantinen und Retail.
             </p>
           </div>
+
+          <nav aria-label="Lösungen">
+            <h3 className="text-sm font-semibold text-white">Lösungen</h3>
+            <ul className="mt-4 space-y-3 text-sm text-slate-400">
+              {solutionLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:text-white">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           <nav aria-label="Produkt und Unternehmen">
             <h3 className="text-sm font-semibold text-white">Produkt</h3>

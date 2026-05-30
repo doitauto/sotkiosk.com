@@ -1,7 +1,9 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import {
+  ArrowRight,
   CreditCard,
   Hand,
   ListOrdered,
@@ -191,21 +193,29 @@ export default function GuestExperience() {
             <div>
               <p className="section-label">Mehr als Gastronomie</p>
               <h3 className="mt-3 text-balance font-display text-2xl font-black tracking-[-0.05em] text-slate-950 sm:text-3xl">
-                Auch als Spenden-Kiosk konfigurierbar.
+                Auch als digitale Spendensäule konfigurierbar.
               </h3>
               <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
-                Dieselbe Plattform, ein anderer Modus: Spendenbeträge,
-                Kampagnen-Branding und ein eigener Ablauf – ohne separate
-                Software. Self-Order, Self-Checkout und Spenden laufen auf einer
-                Basis.
+                Dieselbe Plattform, ein anderer Modus: Als digitale Spendensäule
+                bzw. Spendenautomat sammeln Sie bargeldlos Spenden – mit festen
+                Beträgen, Kampagnen-Branding und eigenem Ablauf, ohne separate
+                Software. Self-Order, Self-Checkout, Spenden und Digital Signage
+                laufen auf einer Basis.
               </p>
-              <div className="mt-5">
+              <div className="mt-5 flex flex-wrap items-center gap-4">
                 <LiveDemo
                   url="https://kiosk.sotkiosk.com/donation/bee9a6aa-6239-4368-916b-f50f44fb8941/bf12fecc-114e-43ee-b23f-8f865ae8330c"
                   title="SOTKIOSK Spenden-Kiosk – Live-Demo"
                   label="Spenden-Demo ansehen"
                   className="h-11 px-5 text-sm"
                 />
+                <Link
+                  href="/loesungen/spendensaeule"
+                  className="inline-flex items-center gap-1.5 text-sm font-bold text-cyan-700 transition hover:text-cyan-900"
+                >
+                  Mehr zur Spendensäule
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
             </div>
           </div>

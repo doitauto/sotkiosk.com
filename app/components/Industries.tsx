@@ -1,24 +1,31 @@
-import { Building2, ShoppingBag, UtensilsCrossed } from "lucide-react"
+import Link from "next/link"
+import { ArrowRight, Building2, ShoppingBag, UtensilsCrossed } from "lucide-react"
 import Reveal from "@/components/Reveal"
 
 const industries = [
   {
     icon: UtensilsCrossed,
     title: "Gastronomie",
-    text: "Self-Ordering für Quick-Service, Takeaway, Foodcourts und Restaurants mit hoher Frequenz.",
+    text: "Self-Ordering für Quick-Service, Imbiss & Döner, Takeaway, Foodcourts und Restaurants mit hoher Frequenz.",
     points: ["Bestellen & bezahlen ohne Wartezeit", "Menüs, Extras und Upselling steuerbar", "Küche und Kasse bleiben synchron"],
+    href: "/loesungen/self-order-terminal",
+    linkLabel: "Self-Order Terminal ansehen",
   },
   {
     icon: Building2,
     title: "Kantine",
     text: "Digitale Tageskarten, weniger Kassenaufwand und klare Abläufe für Stoßzeiten.",
     points: ["Essenspläne zentral pflegen", "Standort- und Rollenlogik", "Ausweise oder QR-Prozesse integrierbar"],
+    href: "/loesungen/kantine",
+    linkLabel: "Kantinen-Terminal ansehen",
   },
   {
     icon: ShoppingBag,
     title: "Retail",
     text: "Self-Service für Märkte, Showrooms und serviceorientierte Verkaufsflächen.",
     points: ["Scanner- und Payment-Flows möglich", "Cross-Selling am Point of Interaction", "Einheitliches Erlebnis pro Standort"],
+    href: "/loesungen/self-checkout",
+    linkLabel: "Self-Checkout ansehen",
   },
 ]
 
@@ -61,6 +68,13 @@ export default function Industries() {
                     </li>
                   ))}
                 </ul>
+                <Link
+                  href={industry.href}
+                  className="mt-6 inline-flex items-center gap-1.5 text-sm font-bold text-cyan-300 transition hover:text-cyan-200"
+                >
+                  {industry.linkLabel}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               </article>
             ))}
           </div>
