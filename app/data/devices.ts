@@ -1,13 +1,11 @@
 /**
- * Geräte-Katalog für die SOTKIOSK Hardware-Galerie.
+ * Device catalog for the SOTKIOSK hardware gallery.
  *
- * Diese Datei ist die EINZIGE Quelle für die Geräte-Sektion. Neue Modelle
- * werden hier ergänzt – das UI (app/components/Devices.tsx) skaliert automatisch.
+ * This file is the single source for the devices section. Add new models here;
+ * the UI (app/components/Devices.tsx) scales automatically.
  *
- * `imageTodo: true` markiert Modelle, für die noch ein echtes Produktfoto
- * fehlt (OEM-Katalog auf Alibaba ist captcha-geblockt). Bis dahin wird ein
- * passender vorhandener Render als Platzhalter genutzt. Echtes Foto nach
- * public/kiosk-assets/ legen und `image` aktualisieren, dann `imageTodo` entfernen.
+ * Product images are stored locally under public/kiosk-assets/ so the exported
+ * site does not depend on external image hotlinks.
  */
 
 export type FormFactor = "Standgerät" | "Wandmontage" | "Theke" | "Outdoor"
@@ -25,18 +23,16 @@ export type Device = {
   id: string
   name: string
   formFactor: FormFactor
-  /** Verfügbare Bildschirmgrößen, z. B. ['21,5"', '27"']. */
+  /** Available screen sizes, e.g. ['21,5"', '27"']. */
   sizes: string[]
   image: string
   features: DeviceFeature[]
   bestFor: string
-  /** Hebt das Modell als Empfehlung hervor. */
+  /** Highlights the model as recommended. */
   highlight?: boolean
-  /** true = wartet noch auf ein echtes Produktfoto. */
-  imageTodo?: boolean
 }
 
-/** Filter-Reihenfolge in der Galerie. */
+/** Filter order in the gallery. */
 export const FORM_FACTORS: FormFactor[] = [
   "Standgerät",
   "Wandmontage",
@@ -44,7 +40,7 @@ export const FORM_FACTORS: FormFactor[] = [
   "Outdoor",
 ]
 
-/** Kurzlabels für die Hardware-Feature-Tags auf den Karten. */
+/** Short labels for the hardware feature tags on cards. */
 export const FEATURE_LABELS: Record<DeviceFeature, string> = {
   payment: "Payment",
   printer: "Drucker",
@@ -61,7 +57,7 @@ export const devices: Device[] = [
     name: "Standgerät Payment 27″",
     formFactor: "Standgerät",
     sizes: ['27"'],
-    image: "/kiosk-assets/sot-kiosk-hero-kiosk.png",
+    image: "/kiosk-assets/alibaba/liviao-payment-stand-27.jpg",
     features: ["payment", "printer", "qrnfc"],
     bestFor: "Hohe Frequenz, Self-Order und Bezahlen vor Ort",
     highlight: true,
@@ -71,7 +67,7 @@ export const devices: Device[] = [
     name: "Standgerät Kompakt 21,5″",
     formFactor: "Standgerät",
     sizes: ['21,5"'],
-    image: "/kiosk-assets/sot-kiosk-floor-kiosk.png",
+    image: "/kiosk-assets/alibaba/liviao-stand-restaurant-215.jpg",
     features: ["payment", "printer", "qrnfc"],
     bestFor: "Theken, kleine Flächen und Takeaway",
   },
@@ -80,47 +76,43 @@ export const devices: Device[] = [
     name: "Standgerät XL 32″",
     formFactor: "Standgerät",
     sizes: ['32"'],
-    image: "/kiosk-assets/sot-kiosk-floor-kiosk.png",
+    image: "/kiosk-assets/alibaba/liviao-stand-black-215.jpg",
     features: ["payment", "printer", "qrnfc", "scanner"],
     bestFor: "Foodcourts und große, bebilderte Menüs",
-    imageTodo: true,
   },
   {
     id: "standgeraet-barrierearm-24",
     name: "Standgerät Barrierearm 24″",
     formFactor: "Standgerät",
     sizes: ['24"'],
-    image: "/kiosk-assets/sot-kiosk-floor-kiosk.png",
+    image: "/kiosk-assets/alibaba/liviao-payment-stand-27.jpg",
     features: ["payment", "printer", "qrnfc", "accessibility"],
     bestFor: "Barrierearme Bedienhöhe, inklusiver Zugang",
-    imageTodo: true,
   },
   {
     id: "self-checkout-27-waage",
     name: "Self-Checkout 27″ mit Waage",
     formFactor: "Standgerät",
     sizes: ['27"'],
-    image: "/kiosk-assets/sot-kiosk-floor-kiosk.png",
+    image: "/kiosk-assets/alibaba/liviao-stand-lineup.jpg",
     features: ["payment", "printer", "scanner", "scale"],
     bestFor: "Retail Self-Checkout mit Barcode und Wiegen",
-    imageTodo: true,
   },
   {
     id: "theke-kompakt-156",
     name: "Theke Kompakt 15,6″",
     formFactor: "Theke",
     sizes: ['15,6"'],
-    image: "/kiosk-assets/sot-kiosk-compact-kiosk.png",
+    image: "/kiosk-assets/alibaba/liviao-wall-payment-27.jpg",
     features: ["payment", "qrnfc"],
     bestFor: "Tresen und begrenzter Platz",
-    imageTodo: true,
   },
   {
     id: "theke-215",
     name: "Theke 21,5″",
     formFactor: "Theke",
     sizes: ['21,5"'],
-    image: "/kiosk-assets/sot-kiosk-compact-kiosk.png",
+    image: "/kiosk-assets/alibaba/liviao-stand-restaurant-215.jpg",
     features: ["payment", "printer", "qrnfc"],
     bestFor: "Bestellannahme direkt am Tresen",
   },
@@ -129,7 +121,7 @@ export const devices: Device[] = [
     name: "Wandmontage 27″",
     formFactor: "Wandmontage",
     sizes: ['27"'],
-    image: "/kiosk-assets/sot-kiosk-wall-kiosk.png",
+    image: "/kiosk-assets/alibaba/liviao-wallmount-pair.jpg",
     features: ["payment", "qrnfc"],
     bestFor: "Platzsparend an der Wand",
   },
@@ -138,19 +130,17 @@ export const devices: Device[] = [
     name: "Wandmontage XL 32″",
     formFactor: "Wandmontage",
     sizes: ['32"'],
-    image: "/kiosk-assets/sot-kiosk-wall-kiosk.png",
+    image: "/kiosk-assets/alibaba/liviao-wallmount-pair.jpg",
     features: ["payment", "qrnfc", "scanner"],
     bestFor: "Eingangsbereiche und Lobbys",
-    imageTodo: true,
   },
   {
     id: "outdoor-27",
     name: "Outdoor Standgerät 27″",
     formFactor: "Outdoor",
     sizes: ['27"'],
-    image: "/kiosk-assets/sot-kiosk-floor-kiosk.png",
+    image: "/kiosk-assets/alibaba/liviao-stand-black-215.jpg",
     features: ["payment", "qrnfc", "camera"],
     bestFor: "Wetterfest für Drive-Thru und Außenbereich",
-    imageTodo: true,
   },
 ]

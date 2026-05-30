@@ -212,8 +212,8 @@ export default function Contact() {
                   className="mt-1.5 h-12 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none ring-offset-white transition focus-visible:ring-2 focus-visible:ring-cyan-400"
                 >
                   <option>Demo & Angebot</option>
-                  <option>Software Lizenz</option>
-                  <option>Gerätepaket</option>
+                  <option>Gerätepaket Komplett 27&quot;/32&quot; KIOSK</option>
+                  <option>All-in-One SOT.KIOSK</option>
                   <option>Projekt Rollout</option>
                   <option>Integration prüfen</option>
                 </select>

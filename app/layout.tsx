@@ -64,9 +64,9 @@ const jsonLd = {
   url: SITE_URL,
   offers: {
     '@type': 'Offer',
-    price: '299',
+    price: '4999',
     priceCurrency: 'EUR',
-    description: 'Software-Lizenz ab 299 € / Monat',
+    description: 'Gerätepaket Komplett mit 27" oder 32" KIOSK ab 4.999 € Kauf',
   },
   publisher: {
     '@type': 'Organization',

@@ -96,19 +96,19 @@ export default function Devices() {
           </p>
         </Reveal>
 
-        {/* Geräte-Lineup als Banner */}
+        {/* Device lineup banner */}
         <Reveal
           delay={80}
           className="mt-12 overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-b from-white to-slate-100 shadow-card"
         >
           <img
-            src="/kiosk-assets/sot-kiosk-device-lineup.png"
-            alt="SOT.KIOSK Geräte: Theken-Terminal, Standgerät und Wandmontage nebeneinander"
+            src="/kiosk-assets/alibaba/liviao-device-lineup-banner.jpg"
+            alt="SOT.KIOSK Geräte: Standgeräte, Wandmontage und Payment-Terminal nebeneinander"
             className="h-auto w-full object-cover"
           />
         </Reveal>
 
-        {/* Filter-Chips */}
+        {/* Filter chips */}
         <div className="mt-12 flex flex-wrap items-center gap-2">
           <span className="mr-1 text-sm font-bold uppercase tracking-[0.18em] text-slate-500">
             Bauform
@@ -146,7 +146,7 @@ export default function Devices() {
           })}
         </div>
 
-        {/* Geräte-Grid (remount per Filter → gestaffelte Reveals) */}
+        {/* Device grid, remounted per filter for staggered reveals */}
         <div
           key={filter}
           className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
@@ -216,7 +216,7 @@ export default function Devices() {
           ))}
         </div>
 
-        {/* Hardware-Callouts: Alle Geräte bieten */}
+        {/* Hardware callouts shared by all devices */}
         <Reveal className="mt-16">
           <h3 className="text-center font-display text-2xl font-black tracking-[-0.05em] text-slate-950">
             Alle Geräte bieten
@@ -237,7 +237,7 @@ export default function Devices() {
           </div>
         </Reveal>
 
-        {/* Vergleichstabelle (ausklappbar) */}
+        {/* Collapsible comparison table */}
         <div className="mt-12 text-center">
           <button
             type="button"

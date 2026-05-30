@@ -6,34 +6,35 @@ import Reveal from "@/components/Reveal"
 
 const packages = [
   {
-    icon: Cloud,
-    number: "01",
-    name: "Software Lizenz",
-    price: "ab 299 €",
-    cadence: "/Monat",
-    description: "Für bestehende Hardware oder Ihre IT-Umgebung.",
-    features: [
-      "SOTKIOSK Software",
-      "Regelmäßige Updates",
-      "Remote-Support",
-      "Backend & Auswertungen",
-    ],
-    highlighted: false,
-  },
-  {
     icon: ServerCog,
-    number: "02",
-    name: "Gerätepaket",
+    number: "01",
+    name: "Gerätepaket Komplett",
     price: "ab 4.999 €",
     cadence: "Kauf",
-    description: "Kiosk-Hardware inklusive Software - sofort einsatzbereit.",
+    description: 'Komplettpaket mit 27" oder 32" SOT.KIOSK Terminal.',
     features: [
-      "Premium Kiosk-Hardware",
+      '27" oder 32" KIOSK',
       "SOTKIOSK Software inklusive",
-      "Lieferung & Einrichtung",
-      "Einweisung & Inbetriebnahme",
+      "Payment-ready Konfiguration",
+      "Einrichtung & Inbetriebnahme",
     ],
     highlighted: true,
+  },
+  {
+    icon: Cloud,
+    number: "02",
+    name: "All-in-One SOT.KIOSK",
+    price: "ab 299 €",
+    cadence: "/Monat",
+    description:
+      "Modernes Self-Service-Terminal inklusive Betrieb, Wartung und persönlichem Support.",
+    features: [
+      "Hochwertiges 27”/32” KIOSK",
+      "Einrichtung & Konfiguration",
+      "Remote-Service & Wartung",
+      "Updates & Monitoring",
+    ],
+    highlighted: false,
   },
   {
     icon: Layers3,
@@ -58,7 +59,7 @@ export default function Pricing() {
       <Reveal className="container">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
           <div>
-            <p className="section-label text-cyan-300">Software + Gerätepakete</p>
+            <p className="section-label text-cyan-300">Gerätepakete + Software</p>
             <h2 className="mt-4 text-balance font-display text-4xl font-black leading-tight tracking-[-0.07em] text-white sm:text-6xl">
               Die passende Lösung für Ihren Standort.
             </h2>
