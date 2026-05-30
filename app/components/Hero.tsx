@@ -53,7 +53,7 @@ export default function Hero() {
         <div className="grid items-center gap-12 pb-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 lg:pb-20">
           <div className="max-w-3xl animate-fade-in-up">
             <h1 className="text-balance font-display text-5xl font-black leading-[0.92] tracking-[-0.08em] text-white sm:text-6xl lg:text-7xl xl:text-8xl">
-              Self-Order Hardware &amp; Software von{" "}
+              Self-Order Kiosk &amp; Software von{" "}
               <span className="bg-gradient-to-r from-cyan-300 to-emerald-300 bg-clip-text text-transparent">
                 SOTKIOSK
               </span>
