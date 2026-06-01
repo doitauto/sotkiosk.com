@@ -129,7 +129,7 @@ export default function CookieBanner() {
               Einige sind notwendig, andere helfen uns die Website zu
               verbessern.{" "}
               <Link
-                href="/cookies"
+                href="/cookies/"
                 className="font-semibold text-cyan-300 underline-offset-4 hover:underline"
               >
                 Mehr erfahren

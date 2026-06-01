@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "AGB",
   description: "Allgemeine Geschäftsbedingungen von SOTKIOSK",
   alternates: { canonical: "/agb" },
+  robots: { index: false, follow: true },
 }
 
 export default function AGBPage() {

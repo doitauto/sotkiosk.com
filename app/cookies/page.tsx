@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Cookie-Richtlinie",
   description: "Cookie-Richtlinie von SOTKIOSK",
   alternates: { canonical: "/cookies" },
+  robots: { index: false, follow: true },
 }
 
 export default function CookiesPage() {

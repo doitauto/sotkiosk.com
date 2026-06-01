@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils"
 import Logo from "./Logo"
 
 const navItems = [
-  { href: "/loesungen", label: "Lösungen" },
+  { href: "/loesungen/", label: "Lösungen" },
   { href: "/#software", label: "Software" },
   { href: "/#devices", label: "Geräte" },
   { href: "/#system", label: "System" },

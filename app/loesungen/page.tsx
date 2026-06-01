@@ -81,7 +81,7 @@ export default function SolutionsIndexPage() {
             {solutions.map((solution) => (
               <Link
                 key={solution.slug}
-                href={`/loesungen/${solution.slug}`}
+                href={`/loesungen/${solution.slug}/`}
                 className="group flex flex-col overflow-hidden rounded-[1.7rem] border border-slate-200 bg-white shadow-card transition-transform duration-300 hover:-translate-y-1"
               >
                 <div className="relative flex h-48 items-center justify-center overflow-hidden bg-gradient-to-b from-white to-slate-100">

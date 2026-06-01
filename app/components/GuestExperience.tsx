@@ -210,7 +210,7 @@ export default function GuestExperience() {
                   className="h-11 px-5 text-sm"
                 />
                 <Link
-                  href="/loesungen/spendensaeule"
+                  href="/loesungen/spendensaeule/"
                   className="inline-flex items-center gap-1.5 text-sm font-bold text-cyan-700 transition hover:text-cyan-900"
                 >
                   Mehr zur Spendensäule

@@ -12,9 +12,9 @@ const productLinks = [
 ]
 
 const solutionLinks = [
-  { href: "/loesungen", label: "Alle Lösungen" },
+  { href: "/loesungen/", label: "Alle Lösungen" },
   ...solutions.map((solution) => ({
-    href: `/loesungen/${solution.slug}`,
+    href: `/loesungen/${solution.slug}/`,
     label: solution.navLabel,
   })),
 ]
@@ -25,11 +25,11 @@ const companyLinks = [
 ]
 
 const legalLinks = [
-  { href: "/impressum", label: "Impressum" },
-  { href: "/datenschutz", label: "Datenschutz" },
-  { href: "/agb", label: "AGB" },
-  { href: "/widerruf", label: "Widerruf" },
-  { href: "/cookies", label: "Cookies" },
+  { href: "/impressum/", label: "Impressum" },
+  { href: "/datenschutz/", label: "Datenschutz" },
+  { href: "/agb/", label: "AGB" },
+  { href: "/widerruf/", label: "Widerruf" },
+  { href: "/cookies/", label: "Cookies" },
 ]
 
 const contactItems = [

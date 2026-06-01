@@ -15,10 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       path: `loesungen/${solution.slug}`,
       priority: 0.8,
     })),
-    ...["agb", "cookies", "datenschutz", "impressum", "widerruf"].map((path) => ({
-      path,
-      priority: 0.4,
-    })),
   ].map(({ path, priority }) => ({
     url: path ? `${BASE_URL}/${path}/` : `${BASE_URL}/`,
     lastModified,

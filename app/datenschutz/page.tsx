@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Datenschutzerklärung",
   description: "Datenschutzerklärung von SOTKIOSK gemäß DSGVO",
   alternates: { canonical: "/datenschutz" },
+  robots: { index: false, follow: true },
 }
 
 export default function DatenschutzPage() {

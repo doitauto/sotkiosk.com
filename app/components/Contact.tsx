@@ -256,7 +256,7 @@ export default function Contact() {
 
               <p className="mt-4 text-xs leading-5 text-slate-500">
                 Mit dem Absenden stimmen Sie unserer{" "}
-                <a href="/datenschutz" className="underline hover:text-slate-700">
+                <a href="/datenschutz/" className="underline hover:text-slate-700">
                   Datenschutzerklärung
                 </a>{" "}
                 zu.

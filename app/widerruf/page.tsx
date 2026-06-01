@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Widerrufsbelehrung",
   description: "Widerrufsbelehrung von SOTKIOSK",
   alternates: { canonical: "/widerruf" },
+  robots: { index: false, follow: true },
 }
 
 export default function WiderrufPage() {

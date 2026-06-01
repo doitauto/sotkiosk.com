@@ -8,7 +8,7 @@ const industries = [
     title: "Gastronomie",
     text: "Self-Ordering für Quick-Service, Imbiss & Döner, Takeaway, Foodcourts und Restaurants mit hoher Frequenz.",
     points: ["Bestellen & bezahlen ohne Wartezeit", "Menüs, Extras und Upselling steuerbar", "Küche und Kasse bleiben synchron"],
-    href: "/loesungen/self-order-terminal",
+    href: "/loesungen/self-order-terminal/",
     linkLabel: "Self-Order Terminal ansehen",
   },
   {
@@ -16,7 +16,7 @@ const industries = [
     title: "Kantine",
     text: "Digitale Tageskarten, weniger Kassenaufwand und klare Abläufe für Stoßzeiten.",
     points: ["Essenspläne zentral pflegen", "Standort- und Rollenlogik", "Ausweise oder QR-Prozesse integrierbar"],
-    href: "/loesungen/kantine",
+    href: "/loesungen/kantine/",
     linkLabel: "Kantinen-Terminal ansehen",
   },
   {
@@ -24,7 +24,7 @@ const industries = [
     title: "Retail",
     text: "Self-Service für Märkte, Showrooms und serviceorientierte Verkaufsflächen.",
     points: ["Scanner- und Payment-Flows möglich", "Cross-Selling am Point of Interaction", "Einheitliches Erlebnis pro Standort"],
-    href: "/loesungen/self-checkout",
+    href: "/loesungen/self-checkout/",
     linkLabel: "Self-Checkout ansehen",
   },
 ]

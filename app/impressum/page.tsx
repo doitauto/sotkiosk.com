@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Impressum",
   description: "Impressum und rechtliche Angaben von SOTKIOSK",
   alternates: { canonical: "/impressum" },
+  robots: { index: false, follow: true },
 }
 
 export default function ImpressumPage() {

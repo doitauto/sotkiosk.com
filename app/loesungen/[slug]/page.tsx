@@ -133,7 +133,7 @@ export default async function SolutionPage({
               Start
             </Link>
             <ChevronRight className="h-3.5 w-3.5" />
-            <Link href="/loesungen" className="hover:text-white">
+            <Link href="/loesungen/" className="hover:text-white">
               Lösungen
             </Link>
             <ChevronRight className="h-3.5 w-3.5" />
@@ -317,7 +317,7 @@ export default async function SolutionPage({
             {related.map((item) => (
               <Link
                 key={item.slug}
-                href={`/loesungen/${item.slug}`}
+                href={`/loesungen/${item.slug}/`}
                 className="group flex items-center justify-between gap-4 rounded-[1.4rem] border border-slate-200 bg-white p-5 shadow-soft transition hover:border-cyan-300 hover:shadow-card"
               >
                 <span>
