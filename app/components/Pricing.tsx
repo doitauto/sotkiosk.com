@@ -9,7 +9,7 @@ const packages = [
     icon: ServerCog,
     number: "01",
     name: "Gerätepaket Komplett",
-    price: "ab 4.999 €",
+    price: "ab 8.999 €",
     cadence: "Kauf",
     description: 'Komplettpaket mit 27" oder 32" SOT.KIOSK Terminal.',
     features: [
