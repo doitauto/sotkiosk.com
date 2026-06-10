@@ -108,7 +108,7 @@ export const solutions: Solution[] = [
       {
         question: "Was kostet ein Self-Order Terminal?",
         answer:
-          "Das Gerätepaket Komplett mit 27\" oder 32\" Terminal startet ab 4.999 € im Kauf, die All-in-One-Variante ab 299 € pro Monat inklusive Betrieb und Wartung. Der finale Preis hängt von Konfiguration und Integration ab.",
+          "Das Gerätepaket Komplett mit 27\" oder 32\" Terminal startet ab 8.999 € im Kauf, die All-in-One-Variante ab 299 € pro Monat inklusive Betrieb und Wartung. Der finale Preis hängt von Konfiguration und Integration ab.",
       },
       {
         question: "Lässt sich das Selbstbedienungsterminal an meine Kasse anbinden?",

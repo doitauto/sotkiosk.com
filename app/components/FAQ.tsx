@@ -35,7 +35,7 @@ const faqs = [
   {
     question: "Gibt es Miete und Kauf?",
     answer:
-      'Ja. Die Website zeigt die aktuellen Einstiegspunkte: Gerätepaket Komplett mit 27" oder 32" KIOSK ab 4.999 € Kauf sowie All-in-One SOT.KIOSK ab 299 € pro Monat. Der finale Preis hängt von Konfiguration und Integration ab.',
+      'Ja. Die Website zeigt die aktuellen Einstiegspunkte: Gerätepaket Komplett mit 27" oder 32" KIOSK ab 8.999 € Kauf sowie All-in-One SOT.KIOSK ab 299 € pro Monat. Der finale Preis hängt von Konfiguration und Integration ab.',
   },
   {
     question: "In welchen Sprachen läuft die Bestelloberfläche?",

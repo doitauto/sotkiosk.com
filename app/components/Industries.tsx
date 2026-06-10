@@ -49,7 +49,7 @@ export default function Industries() {
             {industries.map((industry) => (
               <article
                 key={industry.title}
-                className="rounded-[1.8rem] border border-white/10 bg-white/[0.06] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.28)] backdrop-blur"
+                className="rounded-[1.8rem] border border-white/10 bg-white/[0.06] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.28)] backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-cyan-300/40"
               >
                 <div className="grid h-12 w-12 place-items-center rounded-2xl border border-cyan-300/30 bg-cyan-300/10 text-cyan-300">
                   <industry.icon className="h-5 w-5" />

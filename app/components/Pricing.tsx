@@ -29,7 +29,7 @@ const packages = [
     description:
       "Modernes Self-Service-Terminal inklusive Betrieb, Wartung und persönlichem Support.",
     features: [
-      "Hochwertiges 27”/32” KIOSK",
+      'Hochwertiges 27" oder 32" KIOSK',
       "Einrichtung & Konfiguration",
       "Remote-Service & Wartung",
       "Updates & Monitoring",
@@ -75,12 +75,17 @@ export default function Pricing() {
             <article
               key={item.name}
               className={cn(
-                "rounded-[1.7rem] border bg-white/[0.04] p-6 transition duration-300",
+                "relative rounded-[1.7rem] border bg-white/[0.04] p-6 transition duration-300 hover:-translate-y-1",
                 item.highlighted
                   ? "border-cyan-300 shadow-[0_0_0_1px_rgba(103,232,249,0.4),0_24px_80px_rgba(34,211,238,0.18)]"
                   : "border-white/14 hover:border-white/30",
               )}
             >
+              {item.highlighted && (
+                <span className="absolute right-6 top-6 rounded-full bg-cyan-300 px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-slate-950">
+                  Beliebt
+                </span>
+              )}
               <div className="grid h-12 w-12 place-items-center rounded-2xl border border-cyan-300/35 bg-cyan-300/10 text-cyan-300">
                 <item.icon className="h-5 w-5" />
               </div>

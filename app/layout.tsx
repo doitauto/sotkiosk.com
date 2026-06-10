@@ -122,7 +122,7 @@ const jsonLd = {
         '@type': 'Offer',
         price: '8999',
         priceCurrency: 'EUR',
-        description: 'Gerätepaket Komplett mit 27" oder 32" KIOSK ab 4.999 € Kauf',
+        description: 'Gerätepaket Komplett mit 27" oder 32" KIOSK ab 8.999 € Kauf',
       },
       publisher: { '@id': `${SITE_URL}/#organization` },
     },
