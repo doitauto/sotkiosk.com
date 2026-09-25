@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const entries: MetadataRoute.Sitemap = [
     { path: "", priority: 1 },
+    { path: "pos", priority: 0.9 },
     { path: "loesungen", priority: 0.9 },
     ...solutions.map((solution) => ({
       path: `loesungen/${solution.slug}`,

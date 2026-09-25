@@ -4,14 +4,14 @@ export const dynamic = "force-static"
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "SOTKIOSK – Self-Order Kiosk & Software",
+    name: "SOTKIOSK – Kassensystem & Self-Order",
     short_name: "SOTKIOSK",
     description:
-      "Self-Order Kiosk & Software von SOTKIOSK: moderne Touch-Terminals mit Menüführung, Payment, Kassen-Anbindung und Standortverwaltung.",
+      "SOT POS Kassensystem, Self-Order Kiosk, Küchen-Display und Backoffice für Ihre Gastronomie.",
     start_url: "/",
     display: "standalone",
-    background_color: "#020617",
-    theme_color: "#020617",
+    background_color: "#f7f7f2",
+    theme_color: "#19342b",
     lang: "de",
     icons: [
       {

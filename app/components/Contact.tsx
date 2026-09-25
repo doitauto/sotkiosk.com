@@ -74,7 +74,8 @@ export default function Contact() {
         }
 
         toast.success("Nachricht gesendet", {
-          description: "Wir prüfen Ihre Anfrage und melden uns mit den nächsten Schritten.",
+          description:
+            "Wir prüfen Ihre Anfrage und melden uns mit den nächsten Schritten.",
         })
         setFormData(initialFormData)
       } catch {
@@ -102,27 +103,28 @@ export default function Contact() {
     )
     window.location.href = `mailto:${RECIPIENT_EMAIL}?subject=${subject}&body=${body}`
     toast.info("E-Mail-Programm wird geöffnet", {
-      description: "Falls sich nichts öffnet, schreiben Sie uns an info@doitauto.de.",
+      description:
+        "Falls sich nichts öffnet, schreiben Sie uns an info@doitauto.de.",
     })
     setSubmitting(false)
   }
 
   return (
-    <section id="contact" className="section bg-slate-950 pt-0 text-white">
+    <section id="contact" className="site-section contact-section text-white">
       <div className="container">
-        <div className="relative overflow-hidden rounded-[2.4rem] border border-white/10 bg-[radial-gradient(circle_at_88%_18%,rgba(34,211,238,0.18),transparent_34%),linear-gradient(135deg,#020617,#101827)] p-5 shadow-[0_40px_120px_rgba(0,0,0,0.42)] md:p-8 lg:p-10">
+        <div className="relative p-0">
           <div className="grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
             <div className="flex h-full flex-col justify-between">
               <div>
-                <p className="section-label text-cyan-300">
+                <p className="site-eyebrow text-[#c3dca2]">
                   Persönlich & unverbindlich
                 </p>
-                <h2 className="mt-4 text-balance font-display text-4xl font-black leading-tight tracking-[-0.07em] text-white sm:text-6xl">
-                  Demo & Angebot anfragen.
+                <h2 className="mt-4 text-balance text-4xl font-semibold leading-tight tracking-[-0.05em] text-white sm:text-5xl">
+                  Gute Gespräche. Gute Lösungen.
                 </h2>
-                <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">
-                  Erzählen Sie uns von Standort, Kasse und gewünschter Hardware.
-                  Wir prüfen, welches Software- und Gerätepaket technisch passt.
+                <p className="mt-5 max-w-xl text-base leading-8 text-[#bac8b2]">
+                  Erzählen Sie uns von Ihrem Betrieb. Wir zeigen Ihnen SOT POS
+                  und Self-Order und finden gemeinsam das passende Setup.
                 </p>
               </div>
 
@@ -149,7 +151,7 @@ export default function Contact() {
 
             <form
               onSubmit={handleSubmit}
-              className="rounded-[2rem] border border-slate-200 bg-white p-5 text-slate-950 shadow-elevated sm:p-7"
+              className="rounded-2xl border border-[#dce3d1] bg-[#f8faf4] p-5 text-[#19342b] sm:p-7"
             >
               <input
                 type="checkbox"
@@ -201,7 +203,10 @@ export default function Contact() {
               </div>
 
               <div className="mt-5">
-                <Label htmlFor="interest" className="text-sm font-bold text-slate-800">
+                <Label
+                  htmlFor="interest"
+                  className="text-sm font-bold text-slate-800"
+                >
                   Interesse
                 </Label>
                 <select
@@ -209,18 +214,22 @@ export default function Contact() {
                   name="interest"
                   value={formData.interest}
                   onChange={handleChange}
-                  className="mt-1.5 h-12 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none ring-offset-white transition focus-visible:ring-2 focus-visible:ring-cyan-400"
+                  className="mt-1.5 h-12 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none ring-offset-white transition focus-visible:ring-2 focus-visible:ring-[#71884e]"
                 >
                   <option>Demo & Angebot</option>
-                  <option>Gerätepaket Komplett 27&quot;/32&quot; KIOSK</option>
-                  <option>All-in-One SOT.KIOSK</option>
+                  <option>SOT POS Kassensystem</option>
+                  <option>Self-Order Kiosk</option>
+                  <option>Kasse + Kiosk + Küche</option>
                   <option>Projekt Rollout</option>
                   <option>Integration prüfen</option>
                 </select>
               </div>
 
               <div className="mt-5">
-                <Label htmlFor="message" className="text-sm font-bold text-slate-800">
+                <Label
+                  htmlFor="message"
+                  className="text-sm font-bold text-slate-800"
+                >
                   Nachricht <span className="text-red-500">*</span>
                 </Label>
                 <Textarea
@@ -254,12 +263,21 @@ export default function Contact() {
                 )}
               </Button>
 
+              {!WEB3FORMS_KEY && (
+                <p className="mt-4 text-xs leading-5 text-slate-600">
+                  Ihre Anfrage wird in Ihrem E-Mail-Programm vorbereitet. Dort
+                  können Sie sie prüfen und versenden.
+                </p>
+              )}
               <p className="mt-4 text-xs leading-5 text-slate-500">
-                Mit dem Absenden stimmen Sie unserer{" "}
-                <a href="/datenschutz/" className="underline hover:text-slate-700">
+                Informationen zur Verarbeitung Ihrer Daten finden Sie in unserer{" "}
+                <a
+                  href="/datenschutz/"
+                  className="underline hover:text-slate-700"
+                >
                   Datenschutzerklärung
-                </a>{" "}
-                zu.
+                </a>
+                .
               </p>
             </form>
           </div>
@@ -282,7 +300,7 @@ function ContactItem({
 }) {
   const content = (
     <>
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">
+      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c3dca2]">
         {title}
       </p>
       <p className="mt-1 text-sm font-semibold text-white">{value}</p>
@@ -291,11 +309,11 @@ function ContactItem({
 
   return (
     <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.06] p-4">
-      <div className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-cyan-300/10 text-cyan-300">
+      <div className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-[#d8f69b]/10 text-[#c3dca2]">
         <Icon className="h-5 w-5" />
       </div>
       {href ? (
-        <a href={href} className="hover:text-cyan-200">
+        <a href={href} className="hover:text-[#d8f69b]">
           {content}
         </a>
       ) : (

@@ -13,7 +13,7 @@ export default function Logo({
   alt = "SOTKIOSK",
   variant = "dark",
 }: Props) {
-  const textColor = variant === "light" ? "text-white" : "text-slate-950"
+  const textColor = variant === "light" ? "text-[#f7f7f2]" : "text-[#19342b]"
 
   return (
     <span
@@ -26,7 +26,11 @@ export default function Logo({
         className={`inline-flex h-full items-center font-display text-[1.35rem] font-black uppercase leading-none tracking-[-0.08em] ${textColor}`}
       >
         <span>SOT</span>
-        <span className="text-cyan-400">KIOSK</span>
+        <span>KIOSK</span>
+        <span
+          aria-hidden="true"
+          className="ml-1.5 mb-0.5 h-2 w-2 self-end rounded-full bg-[#b4ce7a]"
+        />
       </span>
     </span>
   )

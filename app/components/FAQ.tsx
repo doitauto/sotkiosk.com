@@ -4,9 +4,18 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import Reveal from "@/components/Reveal"
 
 const faqs = [
+  {
+    question: "Was ist SOT POS – und was ist SOTKIOSK?",
+    answer:
+      "SOT POS ist unser Kassensystem für die Bedienung durch Ihr Team. Am SOTKIOSK Self-Order Terminal bestellen Ihre Gäste selbst. Beide Produktbereiche gehören zur gleichen Plattform mit Katalogverwaltung, Küche und Backoffice.",
+  },
+  {
+    question: "Kann ich das Kassensystem bereits kennenlernen?",
+    answer:
+      "Ja, in einer persönlichen Demo zeigen wir Ihnen SOT POS und besprechen Ihren Einsatz. Die Thekenkasse, das Belegjournal und der Tagesabschluss sind implementiert. Freigaben für echte Payment- und Druckerhardware sowie die TSE-Anbindung sind noch in Prüfung. Den verfügbaren Einsatzumfang klären wir vor dem Angebot.",
+  },
   {
     question: "Welche Hardware wird unterstützt?",
     answer:
@@ -15,7 +24,7 @@ const faqs = [
   {
     question: "Kann SOTKIOSK mit meinem Kassensystem arbeiten?",
     answer:
-      "Ja, die Software ist auf strukturierte Übergaben an Kasse, Küche oder Warenwirtschaft ausgelegt. Welche Schnittstelle sinnvoll ist, hängt vom bestehenden System und Prozess ab.",
+      "Neben unserem eigenen Kassensystem SOT POS prüfen wir die Anbindung an bestehende Systeme. Ob eine Integration möglich ist und welchen Umfang sie hat, hängt von der verfügbaren Schnittstelle und Ihrem Ablauf ab.",
   },
   {
     question: "Welche Zahlungsarten sind möglich?",
@@ -33,9 +42,9 @@ const faqs = [
       "Ja. Farben, Inhalte, Kategorien und Startbildschirm können auf Marke, Sortiment und Standort angepasst werden.",
   },
   {
-    question: "Gibt es Miete und Kauf?",
+    question: "Was kostet das passende System?",
     answer:
-      'Ja. Die Website zeigt die aktuellen Einstiegspunkte: Gerätepaket Komplett mit 27" oder 32" KIOSK ab 8.999 € Kauf sowie All-in-One SOT.KIOSK ab 299 € pro Monat. Der finale Preis hängt von Konfiguration und Integration ab.',
+      "Sie erhalten ein individuelles Angebot. Der Preis richtet sich nach Softwaremodulen, Hardware, Zahlungsanbindung und Einrichtung. Wir besprechen mit Ihnen, ob eine Kasse, ein Kiosk oder ein Gesamtsystem sinnvoll ist und welche Kauf- oder Mietoptionen zur Verfügung stehen.",
   },
   {
     question: "In welchen Sprachen läuft die Bestelloberfläche?",
@@ -64,29 +73,31 @@ const faqJsonLd = {
 
 export default function FAQ() {
   return (
-    <section id="faq" className="section section-warm">
+    <section id="faq" className="site-section faq-section">
       <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
-      <Reveal className="container">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="section-label justify-center">Häufige Fragen</p>
-          <h2 className="mt-4 text-balance font-display text-4xl font-black leading-tight tracking-[-0.07em] text-slate-950 sm:text-5xl">
-            Kurz und entscheidungsrelevant.
+      <div className="container faq-layout">
+        <div>
+          <p className="site-eyebrow">Gut zu wissen</p>
+          <h2>
+            Gute Fragen.
+            <br />
+            Klare Antworten.
           </h2>
-          <p className="mt-5 text-lg leading-8 text-slate-600">
-            Für Details zu Ihrer Hardware, Kasse und Standortstruktur ist die
-            Demo-Anfrage der schnellste Weg.
+          <p className="mt-5 max-w-xs text-sm leading-7 text-[#637169]">
+            Noch etwas offen? Wir sprechen gern persönlich über Ihren Betrieb
+            und das passende System.
           </p>
         </div>
 
-        <div className="mx-auto mt-12 max-w-4xl">
-          <Accordion type="single" collapsible className="w-full space-y-3">
+        <div>
+          <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, idx) => (
               <AccordionItem
                 key={faq.question}
                 value={`item-${idx}`}
-                className="overflow-hidden rounded-[1.2rem] border border-slate-200 bg-white px-5 shadow-soft data-[state=open]:shadow-card"
+                className="border-b border-[#d9dfd0] py-2"
               >
-                <AccordionTrigger className="text-left text-base font-bold text-slate-950 hover:no-underline">
+                <AccordionTrigger className="text-left text-sm font-semibold text-[#19342b] hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-7 text-slate-600">
@@ -96,7 +107,7 @@ export default function FAQ() {
             ))}
           </Accordion>
         </div>
-      </Reveal>
+      </div>
     </section>
   )
 }

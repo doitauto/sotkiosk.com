@@ -56,13 +56,13 @@ export const solutions: Solution[] = [
     navLabel: "Self-Order Terminal",
     metaTitle: "Self-Order Terminal für die Gastronomie",
     metaDescription:
-      "Self-Order Terminal & Selbstbedienungsterminal für die Gastronomie: Bestellen und bezahlen ohne Wartezeit, höhere Bons, weniger Kassenstress. Demo anfragen.",
+      "Self-Order Terminal & Selbstbedienungsterminal für die Gastronomie: Selbstständig bestellen und bezahlen, Menüs entdecken und die Theke entlasten. Demo anfragen.",
     keywords:
       "Self-Order Terminal, Selbstbedienungsterminal, Bestellterminal Gastronomie, Self-Ordering Kiosk, Bestellsystem Gastronomie, SB-Terminal",
     eyebrow: "Self-Order Terminal",
     h1: "Self-Order Terminal für die Gastronomie",
     heroLead:
-      "Mit dem SOTKIOSK Self-Order Terminal bestellen und bezahlen Ihre Gäste eigenständig am Touchscreen – ohne Wartezeit, mit Bildern, Extras und Upselling. Das Selbstbedienungsterminal entlastet die Kasse und erhöht nachweislich den durchschnittlichen Bonwert.",
+      "Mit dem SOTKIOSK Self-Order Terminal bestellen und bezahlen Ihre Gäste eigenständig am Touchscreen – mit Bildern, Extras und passenden Empfehlungen. Das Selbstbedienungsterminal entlastet die Bestellannahme an der Kasse.",
     heroImage: "/kiosk-assets/sot-kiosk-hero-kiosk.png",
     heroImageAlt:
       "Self-Order Terminal von SOTKIOSK mit Touch-Bestelloberfläche für die Gastronomie",
@@ -84,7 +84,7 @@ export const solutions: Solution[] = [
     ],
     featureBullets: [
       "Touch-Menüführung mit Kategorien, Varianten, Extras und Allergen-Kennzeichnung",
-      "Vor Ort oder zum Mitnehmen – Steuersatz (19 % / 7 %) wird automatisch gesetzt",
+      "Vor Ort oder zum Mitnehmen – hinterlegte Steuerregeln je Bestellart anwenden",
       "Integriertes Payment: Karte, kontaktlos und Wallet direkt am Terminal",
       "Beleg- und Küchenbon-Druck sowie Bestellnummern-Aufruf am Gäste-Display",
       "Mehrsprachig (Deutsch, Englisch, Türkisch) – pro Standort umschaltbar",
@@ -108,7 +108,7 @@ export const solutions: Solution[] = [
       {
         question: "Was kostet ein Self-Order Terminal?",
         answer:
-          "Das Gerätepaket Komplett mit 27\" oder 32\" Terminal startet ab 8.999 € im Kauf, die All-in-One-Variante ab 299 € pro Monat inklusive Betrieb und Wartung. Der finale Preis hängt von Konfiguration und Integration ab.",
+          "Sie erhalten ein individuelles Angebot für Terminal, Software und Einrichtung. Der Preis richtet sich nach Geräteauswahl, Zahlungsanbindung und Integration. Kauf- und Mietoptionen besprechen wir passend zu Ihrem Betrieb.",
       },
       {
         question: "Lässt sich das Selbstbedienungsterminal an meine Kasse anbinden?",
@@ -226,7 +226,7 @@ export const solutions: Solution[] = [
     ],
     featureBullets: [
       "Schnellauswahl für Döner, Dürüm, Box, Menüs und Beilagen mit Extras",
-      "Vor Ort oder zum Mitnehmen mit automatischem Steuersatz (19 % / 7 %)",
+      "Vor Ort oder zum Mitnehmen mit konfigurierten Steuerregeln",
       "Kartenzahlung, kontaktlos und Wallet direkt am Imbiss-Terminal",
       "Küchenbon- und Belegdruck, Bestellnummern-Aufruf am Display",
       "Mehrsprachig – ideal für gemischtes Laufpublikum",

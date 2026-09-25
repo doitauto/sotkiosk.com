@@ -7,9 +7,9 @@ import { solutions } from "@/app/data/solutions"
 const SITE_URL = "https://sotkiosk.com"
 
 export const metadata: Metadata = {
-  title: "Lösungen – Self-Order, Self-Checkout, Spenden & Digital Signage",
+  title: "Lösungen – Kassensystem, Self-Order & mehr",
   description:
-    "SOTKIOSK Lösungen im Überblick: Self-Order Terminal, Restaurant-Kiosk, Döner & Imbiss, digitale Spendensäule, Self-Checkout, Kantine und Digital Signage – eine Plattform.",
+    "SOTKIOSK Lösungen im Überblick: POS Kassensystem, Self-Order Terminal, Restaurant-Kiosk, Döner & Imbiss, digitale Spendensäule, Self-Checkout, Kantine und Digital Signage – eine Plattform.",
   keywords:
     "Self-Order Lösungen, Kiosk Lösungen, Selbstbedienungsterminal, Self-Checkout, digitale Spendensäule, Digital Signage, Bestellterminal",
   alternates: { canonical: "/loesungen" },
@@ -31,7 +31,12 @@ const jsonLd = {
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Start", item: `${SITE_URL}/` },
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Start",
+          item: `${SITE_URL}/`,
+        },
         {
           "@type": "ListItem",
           position: 2,
@@ -42,12 +47,20 @@ const jsonLd = {
     },
     {
       "@type": "ItemList",
-      itemListElement: solutions.map((solution, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name: solution.navLabel,
-        url: `${SITE_URL}/loesungen/${solution.slug}/`,
-      })),
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "SOT POS Kassensystem",
+          url: `${SITE_URL}/pos/`,
+        },
+        ...solutions.map((solution, index) => ({
+          "@type": "ListItem",
+          position: index + 2,
+          name: solution.navLabel,
+          url: `${SITE_URL}/loesungen/${solution.slug}/`,
+        })),
+      ],
     },
   ],
 }
@@ -57,19 +70,20 @@ export default function SolutionsIndexPage() {
     <>
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
 
-      <section className="relative isolate overflow-hidden bg-slate-950 text-white">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_72%_22%,rgba(34,211,238,0.24),transparent_32%),linear-gradient(115deg,#020617_0%,#05070b_48%,#111827_100%)]" />
-        <div className="absolute bottom-0 left-0 right-0 -z-10 h-40 bg-gradient-to-t from-white to-transparent" />
+      <section className="relative isolate overflow-hidden bg-[#1c342c] text-white">
+        <div className="absolute inset-0 -z-10 bg-[#1c342c]" />
         <div className="container py-16 md:py-24">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="section-label justify-center text-cyan-300">Lösungen</p>
-            <h1 className="mt-4 text-balance font-display text-4xl font-black leading-[0.95] tracking-[-0.07em] text-white sm:text-5xl lg:text-6xl">
+            <p className="section-label justify-center text-[#c3dca2]">
+              Lösungen
+            </p>
+            <h1 className="mt-4 text-balance font-sans text-4xl font-semibold leading-[0.95] tracking-[-0.07em] text-white sm:text-5xl lg:text-6xl">
               Eine Plattform. Viele Einsatzbereiche.
             </h1>
-            <p className="mt-6 text-pretty text-lg leading-8 text-slate-300">
-              Vom Self-Order Terminal über die digitale Spendensäule bis zum
-              Digital Signage: SOTKIOSK deckt alle Selbstbedienungs-Szenarien mit
-              einer Software und passender Hardware ab.
+            <p className="mt-6 text-pretty text-lg leading-8 text-[#c2cdb9]">
+              Vom Kassensystem für Ihr Team über Self-Order für Ihre Gäste bis
+              zur digitalen Spendensäule: Entdecken Sie die Möglichkeiten von
+              SOTKIOSK.
             </p>
           </div>
         </div>
@@ -77,6 +91,25 @@ export default function SolutionsIndexPage() {
 
       <section className="section bg-white">
         <Reveal className="container">
+          <Link href="/pos/" className="pos-solution-banner">
+            <div>
+              <p className="site-eyebrow">SOT POS · Jetzt kennenlernen</p>
+              <h2>Die Kasse für Ihr Team.</h2>
+              <p>
+                Artikel, offene Bons, Zahlungen und Tagesabschluss. Entdecken
+                Sie das Kassensystem von SOTKIOSK.
+              </p>
+              <span className="text-link">
+                SOT POS entdecken <ArrowRight size={17} />
+              </span>
+            </div>
+            <img
+              src="/product/sot-pos-studio.webp"
+              width="1440"
+              height="900"
+              alt="SOT POS Studio Designvorschau"
+            />
+          </Link>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {solutions.map((solution) => (
               <Link
@@ -86,19 +119,20 @@ export default function SolutionsIndexPage() {
               >
                 <div className="relative flex h-48 items-center justify-center overflow-hidden bg-gradient-to-b from-white to-slate-100">
                   <img
+                    loading="lazy"
                     src={solution.heroImage}
                     alt={solution.heroImageAlt}
                     className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-5">
-                  <h2 className="text-lg font-bold tracking-tight text-slate-950">
+                  <h2 className="text-lg font-bold tracking-tight text-[#19342b]">
                     {solution.navLabel}
                   </h2>
                   <p className="mt-2 flex-1 text-sm leading-6 text-slate-600">
                     {solution.cardText}
                   </p>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-cyan-700">
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#657f4a]">
                     Mehr erfahren
                     <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
                   </span>

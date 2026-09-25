@@ -104,7 +104,7 @@ export default function CookieBanner() {
             </Button>
             <Button
               onClick={() => saveAndClose(preferences)}
-              className="bg-slate-950 text-white hover:bg-slate-800"
+              className="bg-[#19342b] text-white hover:bg-slate-800"
             >
               Einstellungen speichern
             </Button>
@@ -115,10 +115,10 @@ export default function CookieBanner() {
   }
 
   return (
-    <div className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-4xl rounded-[1.6rem] border border-white/10 bg-slate-950/92 p-5 text-white shadow-[0_30px_100px_rgba(0,0,0,0.42)] backdrop-blur-xl sm:p-6">
+    <div className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-4xl rounded-[1.6rem] border border-white/10 bg-[#19342b]/95 p-5 text-white shadow-[0_30px_100px_rgba(0,0,0,0.42)] backdrop-blur-xl sm:p-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-start gap-3">
-          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl border border-cyan-300/30 bg-cyan-300/10 text-cyan-300">
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl border border-[#d8f69b]/30 bg-[#d8f69b]/10 text-[#d8f69b]">
             <Cookie className="h-5 w-5" />
           </div>
           <div>
@@ -130,7 +130,7 @@ export default function CookieBanner() {
               verbessern.{" "}
               <Link
                 href="/cookies/"
-                className="font-semibold text-cyan-300 underline-offset-4 hover:underline"
+                className="font-semibold text-[#d8f69b] underline-offset-4 hover:underline"
               >
                 Mehr erfahren
               </Link>
@@ -165,7 +165,7 @@ export default function CookieBanner() {
           </Button>
           <Button
             size="sm"
-            className="bg-cyan-300 font-bold text-slate-950 hover:bg-cyan-200"
+            className="bg-[#d8f69b] font-bold text-slate-950 hover:bg-[#c5e783]"
             onClick={() =>
               saveAndClose({
                 necessary: true,

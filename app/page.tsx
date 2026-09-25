@@ -1,17 +1,22 @@
 import type { Metadata } from "next"
 import Hero from "./components/Hero"
-import Software from "./components/Software"
-import GuestExperience from "./components/GuestExperience"
-import Devices from "./components/Devices"
-import SystemModules from "./components/SystemModules"
-import Workflow from "./components/Workflow"
-import Industries from "./components/Industries"
-import TrustStrip from "./components/TrustStrip"
-import Pricing from "./components/Pricing"
+import ProductExperience from "./components/ProductExperience"
+import {
+  ConnectedPlatform,
+  KioskSection,
+  HardwareSection,
+  IndustrySection,
+  PackageSection,
+} from "./components/PlatformSections"
 import FAQ from "./components/FAQ"
 import Contact from "./components/Contact"
 
 export const metadata: Metadata = {
+  title: {
+    absolute: "SOTKIOSK – Kassensystem & Self-Order für die Gastronomie",
+  },
+  description:
+    "SOT POS Kassensystem und SOTKIOSK Self-Order: Kasse, Bestellterminal, Küchen-Display und Backoffice für Ihre Gastronomie. Jetzt entdecken und Demo vereinbaren.",
   alternates: { canonical: "/" },
 }
 
@@ -19,14 +24,12 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Software />
-      <GuestExperience />
-      <Devices />
-      <SystemModules />
-      <Workflow />
-      <Industries />
-      <TrustStrip />
-      <Pricing />
+      <ProductExperience />
+      <ConnectedPlatform />
+      <KioskSection />
+      <HardwareSection />
+      <IndustrySection />
+      <PackageSection />
       <FAQ />
       <Contact />
     </>

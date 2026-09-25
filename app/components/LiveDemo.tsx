@@ -6,6 +6,7 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  DialogDescription,
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
@@ -87,6 +88,10 @@ export default function LiveDemo({
 
       <DialogContent className="w-auto max-w-none border-0 bg-transparent p-0 shadow-none [&>button]:!right-3 [&>button]:!top-3 [&>button]:!grid [&>button]:!h-9 [&>button]:!w-9 [&>button]:!place-items-center [&>button]:!rounded-full [&>button]:!bg-slate-900/70 [&>button]:!text-white [&>button]:!opacity-100 [&>button]:!ring-1 [&>button]:!ring-white/25 [&>button]:!backdrop-blur hover:[&>button]:!bg-slate-900 [&>button>svg]:!h-5 [&>button>svg]:!w-5">
         <DialogTitle className="sr-only">{title}</DialogTitle>
+        <DialogDescription className="sr-only">
+          Interaktive Kiosk-Ansicht. Sie können die Ansicht schließen oder in
+          einem neuen Tab öffnen.
+        </DialogDescription>
 
         <div
           className="overflow-hidden rounded-[1.4rem] border-[6px] border-slate-950 bg-slate-950 shadow-elevated"
