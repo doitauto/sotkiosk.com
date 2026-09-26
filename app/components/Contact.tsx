@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 
 const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY
-const RECIPIENT_EMAIL = "info@doitauto.de"
+const RECIPIENT_EMAIL = "arif.calhan@sotkiosk.com"
 
 type ContactFormData = {
   name: string
@@ -80,7 +80,7 @@ export default function Contact() {
         setFormData(initialFormData)
       } catch {
         toast.error("Versand fehlgeschlagen", {
-          description: "Bitte schreiben Sie uns direkt an info@doitauto.de.",
+          description: "Bitte schreiben Sie uns direkt an arif.calhan@sotkiosk.com.",
         })
       } finally {
         setSubmitting(false)
@@ -104,7 +104,7 @@ export default function Contact() {
     window.location.href = `mailto:${RECIPIENT_EMAIL}?subject=${subject}&body=${body}`
     toast.info("E-Mail-Programm wird geöffnet", {
       description:
-        "Falls sich nichts öffnet, schreiben Sie uns an info@doitauto.de.",
+        "Falls sich nichts öffnet, schreiben Sie uns an arif.calhan@sotkiosk.com.",
     })
     setSubmitting(false)
   }
@@ -132,8 +132,8 @@ export default function Contact() {
                 <ContactItem
                   icon={Mail}
                   title="E-Mail"
-                  value="info@doitauto.de"
-                  href="mailto:info@doitauto.de"
+                  value="arif.calhan@sotkiosk.com"
+                  href="mailto:arif.calhan@sotkiosk.com"
                 />
                 <ContactItem
                   icon={Phone}

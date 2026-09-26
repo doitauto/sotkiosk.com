@@ -31,7 +31,7 @@ export default function ImpressumPage() {
           <br />
           <strong>Telefax:</strong> 07336 8544
           <br />
-          <strong>E-Mail:</strong> info@doitauto.de
+          <strong>E-Mail:</strong> arif.calhan@sotkiosk.com
           <br />
           <strong>Website:</strong> www.doitauto.de
         </p>

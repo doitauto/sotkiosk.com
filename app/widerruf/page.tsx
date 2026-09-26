@@ -24,7 +24,7 @@ export default function WiderrufPage() {
         <p>
           Um Ihr Widerrufsrecht auszuüben, müssen Sie uns (<strong>SOTKIOSK</strong>,
           Hauptstr. 18, 89173 Lonsee, Deutschland, Telefon: 07336 8543, E-Mail:
-          info@doitauto.de) mittels einer eindeutigen Erklärung (z. B. ein mit
+          arif.calhan@sotkiosk.com) mittels einer eindeutigen Erklärung (z. B. ein mit
           der Post versandter Brief oder E-Mail) über Ihren Entschluss, diesen
           Vertrag zu widerrufen, informieren.
         </p>
@@ -122,7 +122,7 @@ export default function WiderrufPage() {
             <br />
             Deutschland
             <br />
-            E-Mail: info@doitauto.de
+            E-Mail: arif.calhan@sotkiosk.com
           </p>
           <p className="mt-4">
             Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen

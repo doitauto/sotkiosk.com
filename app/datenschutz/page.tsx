@@ -91,7 +91,7 @@ export default function DatenschutzPage() {
           <br />
           Telefon: 07336 8543
           <br />
-          E-Mail: info@doitauto.de
+          E-Mail: arif.calhan@sotkiosk.com
         </p>
         <h3>Speicherdauer</h3>
         <p>

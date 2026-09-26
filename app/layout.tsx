@@ -84,7 +84,7 @@ const jsonLd = {
         url: `${SITE_URL}/icon.svg`,
       },
       image: `${SITE_URL}/og.png`,
-      email: "info@doitauto.de",
+      email: "arif.calhan@sotkiosk.com",
       telephone: "+49 7336 8543",
       address: {
         "@type": "PostalAddress",
@@ -97,7 +97,7 @@ const jsonLd = {
         "@type": "ContactPoint",
         contactType: "sales",
         telephone: "+49 7336 8543",
-        email: "info@doitauto.de",
+        email: "arif.calhan@sotkiosk.com",
         availableLanguage: ["de", "en", "tr"],
       },
     },

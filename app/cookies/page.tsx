@@ -153,7 +153,7 @@ export default function CookiesPage() {
           <br />
           89173 Lonsee
           <br />
-          E-Mail: info@doitauto.de
+          E-Mail: arif.calhan@sotkiosk.com
           <br />
           Telefon: 07336 8543
         </p>

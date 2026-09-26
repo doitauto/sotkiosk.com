@@ -64,9 +64,9 @@ export default function Footer() {
           ))}
           <div className="footer-contact">
             <h2>Wir sind für Sie da.</h2>
-            <a href="mailto:info@doitauto.de">
+            <a href="mailto:arif.calhan@sotkiosk.com">
               <Mail size={15} />
-              info@doitauto.de
+              arif.calhan@sotkiosk.com
             </a>
             <a href="tel:+4973368543">
               <Phone size={15} />
